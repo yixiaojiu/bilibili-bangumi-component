@@ -8,7 +8,7 @@ const mock = readFileSync(path.resolve(__dirname, './src/bilibili.js.mock'), 'ut
 
 export default defineConfig((options) => {
   return {
-    entry: ['src/index.ts'],
+    entry: ['src/vercel.ts', 'src/val-town.ts'],
     outDir: path.resolve(__dirname, '../../api'),
     splitting: false,
     minify: !options.watch,

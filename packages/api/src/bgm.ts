@@ -1,8 +1,6 @@
 import type { BgmQuery, LabelItem, ListItem, ResponseData } from '../../bilibili-bangumi-component/src/shared/types'
 import { serializeSearchParams } from '../../bilibili-bangumi-component/src/shared/utils'
 
-const { BGM } = process.env
-
 const subjectTypeMap = {
   1: '2', // 动画
   2: '4', // 游戏
@@ -15,9 +13,9 @@ const collectionTypeMap = {
   3: '2', // 看过
 }
 
-export async function handler(params: BgmQuery) {
+export async function handler(params: BgmQuery, env?: NodeJS.ProcessEnv) {
   const { subjectType = '1', uid: paramsUid, collectionType = '0', pageNumber = 1, pageSize = 10 } = params
-  const uid = paramsUid ?? BGM
+  const uid = paramsUid ?? env?.BGM
 
   if (!uid) {
     return Response.json({

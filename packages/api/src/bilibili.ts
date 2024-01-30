@@ -1,11 +1,9 @@
 import type { BilibiliQuery, LabelItem, ListItem, ResponseData } from '../../bilibili-bangumi-component/src/shared/types'
 import { numberToZh, serializeSearchParams } from '../../bilibili-bangumi-component/src/shared/utils'
 
-const { BILIBILI } = process.env
-
-export async function handler(query: BilibiliQuery) {
-  const { collectionType = '0', uid = '412686493', pageNumber = '1', pageSize = '10' } = query
-  const vmid = uid ?? BILIBILI
+export async function handler(query: BilibiliQuery, env?: NodeJS.ProcessEnv) {
+  const { collectionType = '0', uid: paramsUid, pageNumber = '1', pageSize = '10' } = query
+  const vmid = paramsUid ?? env?.BILIBILI
 
   if (!vmid) {
     return Response.json({

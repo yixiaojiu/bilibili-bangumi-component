@@ -14,6 +14,7 @@ const subjectMap: Record<Subject, SubjectType> = {
 }
 
 export interface BilibiliParams {
+  uid?: string
   collectionType: Collection
   pageSize: number
   pageNumber: number

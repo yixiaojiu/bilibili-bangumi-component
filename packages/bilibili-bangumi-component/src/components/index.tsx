@@ -14,6 +14,8 @@ import { type ChangeType, Pagination } from './Pagination'
 })
 export class MyComponent {
   @Prop() api: string
+  @Prop() bilibili?: string
+  @Prop() bgm?: string
 
   @State() loading = false
 
@@ -38,6 +40,7 @@ export class MyComponent {
     this.loading = true
     let response
     const bilibiliParams: BilibiliParams = {
+      uid: this.bilibili,
       collectionType: this.activeCollection,
       pageSize: this.pageSize,
       pageNumber: this.pageNumber,
@@ -48,6 +51,7 @@ export class MyComponent {
     else {
       response = await getBangumi(this.api, {
         ...bilibiliParams,
+        uid: this.bgm,
         subjectType: this.activeSubject,
       })
     }

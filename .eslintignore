@@ -7,6 +7,6 @@ node_modules
 **/.stencil/**
 **/www/**
 
-api/index.js
+api/*
 .env*.local
 

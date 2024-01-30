@@ -17,7 +17,13 @@ export async function GET(request: Request) {
   }
 
   if (url.pathname.endsWith('bilibili'))
-    return await bilibili(query)
-  else
-    return await bgm(query)
+    return await bilibili(query, process.env)
+  else if (url.pathname.endsWith('bgm'))
+    return await bgm(query, process.env)
+
+  return Response.json({
+    code: 404,
+    message: 'not found',
+    data: {},
+  }, { status: 404 })
 }
