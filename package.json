@@ -25,14 +25,15 @@
     "test": "vitest run",
     "ts-check:lib": "pnpm --filter bilibili-bangumi-component run ts-check",
     "ci:publish": "pnpm -r publish --access public --no-git-checks",
-    "prepare": "husky install"
+    "pre-commit": "lint-staged --allow-empty && pnpm run build:api",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.3",
     "@types/node": "20",
     "@vercel/node": "^3.0.17",
     "eslint": "^8.56.0",
-    "husky": "^8.0.3",
+    "husky": "^9.0.7",
     "lint-staged": "^15.2.0",
     "tsup": "^8.0.1",
     "tsx": "^4.7.0",
@@ -40,7 +41,7 @@
     "vitest": "^1.2.1"
   },
   "lint-staged": {
-    "**/*.{js,jsx,tsx,ts,md,json}": [
+    "**/*.{tsx,ts,md,json}": [
       "eslint . --fix"
     ]
   }
