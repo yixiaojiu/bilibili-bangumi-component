@@ -12,10 +12,12 @@ import { type ChangeType, Pagination } from './Pagination'
   styleUrl: 'index.css',
   shadow: true,
 })
-export class MyComponent {
+export class BilibiliBangumi {
   @Prop() api: string
-  @Prop() bilibili?: string
-  @Prop() bgm?: string
+  @Prop() bilibiliUid?: string
+  @Prop() bgmUid?: string
+  @Prop() bilibiliEnabled = true
+  @Prop() bgmEnabled = true
 
   @State() loading = false
 
@@ -40,7 +42,7 @@ export class MyComponent {
     this.loading = true
     let response
     const bilibiliParams: BilibiliParams = {
-      uid: this.bilibili,
+      uid: this.bilibiliUid,
       collectionType: this.activeCollection,
       pageSize: this.pageSize,
       pageNumber: this.pageNumber,
@@ -51,7 +53,7 @@ export class MyComponent {
     else {
       response = await getBangumi(this.api, {
         ...bilibiliParams,
-        uid: this.bgm,
+        uid: this.bilibiliUid,
         subjectType: this.activeSubject,
       })
     }

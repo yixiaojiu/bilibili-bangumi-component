@@ -1,7 +1,7 @@
 {
   "name": "@bilibili-bangumi-component/monorepo",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "packageManager": "pnpm@8.14.1",
   "description": "展示 bilibili 与 Bangumi 追番列表的 WebComponent 组件",
@@ -25,7 +25,7 @@
     "test": "vitest run",
     "ts-check:lib": "pnpm --filter bilibili-bangumi-component run ts-check",
     "ci:publish": "pnpm -r publish --access public --no-git-checks",
-    "pre-commit": "lint-staged --allow-empty && pnpm run build:api",
+    "pre-commit": "lint-staged --allow-empty",
     "prepare": "husky"
   },
   "devDependencies": {
