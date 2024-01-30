@@ -2,10 +2,8 @@ import { parseSearchParams } from '../../bilibili-bangumi-component/src/shared/u
 import { handler as bilibili } from './bilibili'
 import { handler as bgm } from './bgm'
 
-export const config = {
-  runtime: 'edge',
-  preferredRegion: ['hkg1', 'hnd1', 'kix1', 'sin1'],
-}
+export const runtime = 'edge'
+export const preferredRegion = ['hkg1', 'hnd1', 'kix1', 'sin1']
 
 export async function GET(request: Request) {
   const url = new URL(request.url)
