@@ -1,0 +1,35 @@
+{
+  "name": "bilibili-bangumi-component",
+  "version": "0.0.1",
+  "description": "展示 bilibili 与 Bangumi 追番列表的 WebComponent 组件",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yixiaojiu/bilibili-bangumi-component/tree/main/packages/bilibili-bangumi-component"
+  },
+  "keywords": ["Bilibili", "Bangumi", "WebComponent"],
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "es2015": "dist/esm/index.js",
+  "es2017": "dist/esm/index.js",
+  "unpkg": "dist/bilibili-bangumi-component/bilibili-bangumi-component.esm.js",
+  "types": "dist/types/index.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "files": [
+    "dist/",
+    "loader/"
+  ],
+  "scripts": {
+    "build": "stencil build",
+    "dev": "stencil build --dev --watch --serve",
+    "generate": "stencil generate",
+    "ts-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@stencil/core": "^4.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "@bilibili-bangumi-component/monorepo",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "packageManager": "pnpm@8.14.1",
+  "description": "展示 bilibili 与 Bangumi 追番列表的 WebComponent 组件",
+  "author": "yixiaojiu",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yixiaojiu/bilibili-bangumi-component"
+  },
+  "main": "index.js",
+  "scripts": {
+    "dev:vercel": "vercel dev",
+    "dev:api": "pnpm --filter api run dev",
+    "dev:lib": "pnpm --filter bilibili-bangumi-component run dev",
+    "build:lib": "pnpm --filter bilibili-bangumi-component run build",
+    "build:api": "pnpm --filter api run build",
+    "build:mock": "pnpm --filter api run build:mock",
+    "lint:fix": "eslint . --fix",
+    "lint": "eslint .",
+    "generate": "pnpm --filter bilibili-bangumi-component run generate",
+    "test": "vitest run",
+    "ts-check:lib": "pnpm --filter bilibili-bangumi-component run ts-check",
+    "ci:publish": "pnpm -r publish --access public --no-git-checks",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.6.3",
+    "@types/node": "20",
+    "@vercel/node": "^3.0.17",
+    "eslint": "^8.56.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "tsup": "^8.0.1",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.1"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,tsx,ts,md,json}": [
+      "eslint . --fix"
+    ]
+  }
+}

@@ -1,0 +1,242 @@
+@layer bilibili-bangumi-component {
+  :host {
+    display: block;
+    /* 基础文本 */
+    --bbc-text-base-color: #4c4948;
+    /* 内容信息的文本 */
+    --bbc-text-primary-color: #2fd8d8;
+    /* 下划线之类的 */
+    --bbc-primary-color: #425aef;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .bbc-tabs {
+    display: flex;
+    gap: 8px;
+  }
+
+  .bbc-tab-item {
+    padding: 4px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--bbc-text-base-color);
+    cursor: pointer;
+  }
+
+  .bbc-tab-item:hover {
+    background-color: var(--bbc-primary-color);
+    color: white;
+  }
+
+  .bbc-tab-item-active {
+    color: white;
+    background-color: var(--bbc-primary-color);
+  }
+
+  .bbc-header-platform {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    height: 40px;
+  }
+
+  .bbc-header-platform .divider {
+    width: 3px;
+    border-radius: 2px;
+    height: 80%;
+    background-color: var(--bbc-primary-color);
+  }
+
+  .bbc-bangumi:last-child {
+    border-bottom: none;
+  }
+
+  .bbc-bangumi-item {
+    display: flex;
+    margin: 12px 0;
+    gap: 16px;
+    padding: 16px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .bbc-bangumi-item img {
+    border-radius: 8px;
+    cursor: pointer;
+    height: 140px;
+    object-fit: cover;
+    aspect-ratio: 3 / 4;
+  }
+
+  .bbc-bangumi-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .bbc-bangumi-title {
+    margin: 0;
+  }
+
+  .bbc-bangumi-title a {
+    color: var(--bbc-text-base-color);
+  }
+
+  .bbc-bangumi-title a:hover {
+    border-bottom: 2px solid var(--bbc-primary-color);
+  }
+
+  .bbc-bangumi-title small {
+    margin-left: 8px;
+    font-weight: normal;
+    font-size: 14px;
+    color: var(--bbc-text-base-color);
+    height: 24px;
+  }
+
+  .bbc-bangumi-labels {
+    color: #FF9843;
+    display: flex;
+  }
+
+  .bbc-bangumi-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 13%;
+    height: 36px;
+    border-right: 1px solid #FF9843;
+  }
+
+  .bbc-bangumi-label:last-child {
+    border-right: none;
+  }
+
+  .bbc-bangumi-label p {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .bbc-bangumi-label:not(.bbc-bangumi-label > .bbc-bangumi-label-title) {
+    justify-content: center;
+  }
+
+  .bbc-bangumi-summary {
+    font-size: 12px;
+    color: var(--bbc-text-base-color);
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .bbc-pagination {
+    height: 40px;
+    text-align: center;
+    padding-right: 20px;
+  }
+
+  .bbc-pagination-button {
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 4px 8px;
+    margin: 0 4px;
+    color: #bbb;
+    cursor: pointer;
+  }
+
+  .bbc-pagination-button:hover {
+    background-color: var(--bbc-primary-color);
+    color: white;
+  }
+
+  .bbc-pagination-pagenum {
+    color: #bbb;
+    font-size: 14px;
+  }
+  
+  .bbc-pagination-input {
+    display: inline-block;
+    color: #bbb;
+    font-size: 12px;
+  }
+
+  .bbc-pagination-input input {
+    display: inline-block;
+    margin: 0 8px;
+    font-size: 12px;
+    color: #bbb;
+    width: 30px;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    text-align: center;
+    outline: none;
+    transition: border .2s ease;
+  }
+
+  .bbc-skeleton-container {
+    animation: skeleton-blink 1.2s ease-in-out infinite;
+  }
+
+  @keyframes skeleton-blink {
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  .bbc-skeleton-avatar {
+    height: 140px;
+    border-radius: 8px;
+    background-color: #f2f3f5;
+    aspect-ratio: 3 / 4;
+  }
+
+  .bbc-skeleton-row {
+    height: 24px;
+    background-color: #f2f3f5;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .bbc-tab-item {
+      padding: 4px 12px;
+    }
+
+    .bbc-header-platform {
+      gap: 16px;
+    }
+
+    .bbc-bangumi-title a {
+      font-size: 16px;
+    }
+
+    .bbc-bangumi-label {
+      width: 30%;
+    }    
+
+    .bbc-bangumi-label p {
+      font-size: 12px;
+    }
+    
+    .bbc-bangumi-label:nth-child(n + 4) {
+      display: none;
+    }
+
+    .bbc-bangumi-label:nth-child(3) {
+      border-right: none;
+    }
+  }
+}

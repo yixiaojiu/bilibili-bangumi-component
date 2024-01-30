@@ -1,0 +1,11 @@
+node_modules
+.vercel
+
+**/.stencil/**
+**/dist/**'
+**/loader/**
+**/.stencil/**
+**/www/**
+
+/api
+.env*.local

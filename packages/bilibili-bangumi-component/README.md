@@ -1,0 +1,1 @@
+# bilibili-bangumi-component
