@@ -8,9 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface BilibiliBangumi {
         "api": string;
-        "bgmEnabled": boolean;
         "bgmUid"?: string;
-        "bilibiliEnabled": boolean;
         "bilibiliUid"?: string;
     }
 }
@@ -28,9 +26,7 @@ declare global {
 declare namespace LocalJSX {
     interface BilibiliBangumi {
         "api"?: string;
-        "bgmEnabled"?: boolean;
         "bgmUid"?: string;
-        "bilibiliEnabled"?: boolean;
         "bilibiliUid"?: string;
     }
     interface IntrinsicElements {

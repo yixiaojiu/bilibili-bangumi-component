@@ -66,6 +66,8 @@
 
 ![vercel-env](docs/images/vercel-env.png)
 
+**注意：** vercel 的接口需要加上 `/api` 路径，例如：`https://xxxx.vercel.app/api`
+
 ### 前端
 
 #### 引入
@@ -174,6 +176,5 @@ bilibili-bangumi {
 
 - [ ] UI 优化
 - [ ] 自建服务器部署
-- [ ] tab 栏展示配置
 - [ ] 支持 Bangumi 书籍收藏展示
 - [ ] 支持添加展示数据

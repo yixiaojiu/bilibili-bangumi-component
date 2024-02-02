@@ -6,6 +6,7 @@ import { getBangumi, getBilibili } from '../shared/api'
 import { Tabs } from './Tabs'
 import { List } from './List'
 import { type ChangeType, Pagination } from './Pagination'
+import { Skeleton } from './Skeleton'
 
 @Component({
   tag: 'bilibili-bangumi',
@@ -16,8 +17,8 @@ export class BilibiliBangumi {
   @Prop() api: string
   @Prop() bilibiliUid?: string
   @Prop() bgmUid?: string
-  @Prop() bilibiliEnabled = true
-  @Prop() bgmEnabled = true
+  // @Prop() bilibiliEnabled = true
+  // @Prop() bgmEnabled = true
 
   @State() loading = false
 
@@ -143,6 +144,7 @@ export class BilibiliBangumi {
         <div>
           <Tabs activeLabel={this.activeCollection} labels={this.collectionLabels} onChange={this.handleCollectionChange} />
         </div>
+        {this.loading && !this.responseData && <Skeleton />}
         {this.responseData && <List loading={this.loading} list={this.responseData.list} />}
         {this.responseData && (
           <Pagination
