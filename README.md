@@ -140,7 +140,7 @@ style.textContent = `
   color: #ccc;
 }
 `
-bilibiliBangumi.attachShadow.appendChild(style)
+bilibiliBangumi.shadowRoot.appendChild(style)
 ```
 
 #### 主题
@@ -151,9 +151,7 @@ bilibiliBangumi.attachShadow.appendChild(style)
 bilibili-bangumi {
   /* 基础文本 */
   --bbc-text-base-color: #4c4948;
-  /* 内容信息的文本 */
-  --bbc-text-primary-color: #2fd8d8;
-  /* 下划线之类的 */
+  /* 下划线、背景之类的 */
   --bbc-primary-color: #425aef;
 }
 ```
