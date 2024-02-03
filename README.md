@@ -4,6 +4,13 @@
 
 参考 [hexo-bilibili-bangumi](https://github.com/HCLonely/hexo-bilibili-bangumi)，[Bilibili-Bangumi-JS](https://github.com/hans362/Bilibili-Bangumi-JS)，[Roozen的小破站](https://roozen.top/bangumis)
 
+## 特性
+
+- 使用 WebComponent 实现，可用于任何前端应用
+- 支持 Bilibili 与 Bangumi
+- 支持主题设置
+- 适配移动端
+
 ## 展示
 
 展示地址 [https://yixiaojiu-blog.netlify.app/docs/record/bangumi/](https://yixiaojiu-blog.netlify.app/docs/record/bangumi/)
@@ -11,13 +18,6 @@
 <img src="docs/images/screenshot-pc.png" alt="screenshot-pc" />
 
 <img src="docs/images/screenshot-mobile.png" width="60%" alt="screenshot-mobile" />
-
-## 特性
-
-- 使用 WebComponent 实现，可用于任何前端应用
-- 支持 Bilibili 与 Bangumi
-- 支持主题设置
-- 适配移动端
 
 ## 使用
 
