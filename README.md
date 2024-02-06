@@ -4,6 +4,8 @@
 
 参考 [hexo-bilibili-bangumi](https://github.com/HCLonely/hexo-bilibili-bangumi)，[Bilibili-Bangumi-JS](https://github.com/hans362/Bilibili-Bangumi-JS)，[Roozen的小破站](https://roozen.top/bangumis)
 
+[视频教程](https://www.bilibili.com/video/BV1ht421W74u)
+
 ## 特性
 
 - 使用 WebComponent 实现，可用于任何前端应用

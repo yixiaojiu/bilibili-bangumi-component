@@ -54,7 +54,7 @@ export class BilibiliBangumi {
     else {
       response = await getBangumi(this.api, {
         ...bilibiliParams,
-        uid: this.bilibiliUid,
+        uid: this.bgmUid,
         subjectType: this.activeSubject,
       })
     }
