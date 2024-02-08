@@ -41,6 +41,8 @@
 
 后端使用 Serverless Function 实现
 
+如果你不太方便搭建后端服务，可以先使用这个地址 `https://yi_xiao_jiu-bangumi.web.val.run`
+
 #### 方案一：使用 val towm
 
 1. 到 [val town](https://www.val.town/) 注册账号
