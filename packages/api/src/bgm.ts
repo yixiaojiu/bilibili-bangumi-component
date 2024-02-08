@@ -1,5 +1,6 @@
 import type { BgmQuery, LabelItem, ListItem, ResponseData } from '../../bilibili-bangumi-component/src/shared/types'
 import { serializeSearchParams } from '../../bilibili-bangumi-component/src/shared/utils'
+import { generateRes } from './utils'
 
 const subjectTypeMap = {
   1: '2', // 动画
@@ -18,11 +19,11 @@ export async function handler(params: BgmQuery, env?: NodeJS.ProcessEnv) {
   const uid = paramsUid ?? env?.BGM
 
   if (!uid) {
-    return Response.json({
+    return generateRes({
       code: 400,
       message: `uid is required`,
       data: {},
-    }, { status: 400 })
+    })
   }
   const searchParams = serializeSearchParams({
     subject_type: subjectTypeMap[subjectType],
@@ -39,13 +40,14 @@ export async function handler(params: BgmQuery, env?: NodeJS.ProcessEnv) {
   const data = await res.json()
 
   if (!res.ok) {
-    return Response.json({
+    return generateRes({
       code: 502,
       message: data.description,
-    }, { status: 500 })
+      data: {},
+    })
   }
 
-  return Response.json({
+  return generateRes({
     code: 200,
     message: 'ok',
     data: handleFetchData(data, { pageNumber, pageSize }),

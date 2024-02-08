@@ -4,7 +4,7 @@
     /* 基础文本 */
     --bbc-text-base-color: #4c4948;
     /* 内容信息的文本 */
-    --bbc-text-primary-color: #2fd8d8;
+    /* --bbc-text-primary-color: #2fd8d8; */
     /* 下划线之类的 */
     --bbc-primary-color: #425aef;
   }
@@ -209,6 +209,36 @@
     background-color: #f2f3f5;
   }
 
+  .bbc-empty {
+    display: flex;
+    padding: 40px 0;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .bbc-empty img {
+    height: 140px;
+    object-fit: cover;
+  }
+
+  .bbc-error {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .bbc-error svg {
+    color: #ff4d4f;
+    height: 72px;
+    width: 72px;
+  }
+
+  .bbc-error p {
+    color: var(--bbc-text-base-color);
+    font-size: 18px;
+  }
 
   @media screen and (max-width: 768px) {
     .bbc-tab-item {

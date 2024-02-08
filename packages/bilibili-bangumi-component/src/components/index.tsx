@@ -7,6 +7,8 @@ import { Tabs } from './Tabs'
 import { List } from './List'
 import { type ChangeType, Pagination } from './Pagination'
 import { Skeleton } from './Skeleton'
+import { Empty } from './Empty'
+import { Error } from './Error'
 
 @Component({
   tag: 'bilibili-bangumi',
@@ -17,10 +19,11 @@ export class BilibiliBangumi {
   @Prop() api: string
   @Prop() bilibiliUid?: string
   @Prop() bgmUid?: string
-  // @Prop() bilibiliEnabled = true
-  // @Prop() bgmEnabled = true
+  @Prop() bilibiliEnabled = true
+  @Prop() bgmEnabled = true
 
   @State() loading = false
+  @State() error?: Error
 
   @State() pageNumber = 1
   @State() pageSize = 15
@@ -36,30 +39,46 @@ export class BilibiliBangumi {
   @State() activeCollection: Collection = '全部'
 
   componentWillLoad() {
+    const filterArr = [this.bilibiliEnabled, this.bgmEnabled]
+    // @ts-expect-error
+    this.platformLabels = this.platformLabels.filter((_, index) => filterArr[index])
+    this.activePlatform = this.platformLabels[0]
     this.fetchData()
   }
 
   private fetchData = async () => {
-    this.loading = true
-    let response
-    const bilibiliParams: BilibiliParams = {
-      uid: this.bilibiliUid,
-      collectionType: this.activeCollection,
-      pageSize: this.pageSize,
-      pageNumber: this.pageNumber,
+    try {
+      this.loading = true
+      this.error = null
+      let response
+      const bilibiliParams: BilibiliParams = {
+        uid: this.bilibiliUid,
+        collectionType: this.activeCollection,
+        pageSize: this.pageSize,
+        pageNumber: this.pageNumber,
+      }
+      if (this.activePlatform === 'Bilibili') {
+        response = await getBilibili(this.api, bilibiliParams)
+      }
+      else {
+        response = await getBangumi(this.api, {
+          ...bilibiliParams,
+          uid: this.bgmUid,
+          subjectType: this.activeSubject,
+        })
+      }
+      if (response.code === 200) {
+        this.responseData = response.data
+      }
+      else {
+        this.error = response
+        this.responseData = null
+      }
     }
-    if (this.activePlatform === 'Bilibili') {
-      response = await getBilibili(this.api, bilibiliParams)
+    catch (error) {
+      this.error = error
+      this.responseData = null
     }
-    else {
-      response = await getBangumi(this.api, {
-        ...bilibiliParams,
-        uid: this.bgmUid,
-        subjectType: this.activeSubject,
-      })
-    }
-    if (response.code === 200)
-      this.responseData = response.data
     this.loading = false
   }
 
@@ -135,7 +154,7 @@ export class BilibiliBangumi {
       <div>
         <div class="bbc-header-platform">
           <Tabs activeLabel={this.activePlatform} labels={this.platformLabels} onChange={this.handlePlatformChange} />
-          {this.activePlatform === 'Bangumi' && <div class="divider" />}
+          {this.platformLabels.length > 1 && <div class="divider" />}
           {
             this.activePlatform === 'Bangumi'
               && <Tabs activeLabel={this.activeSubject} labels={this.subjectLabels} onChange={this.handleSubjectChange} />
@@ -145,7 +164,9 @@ export class BilibiliBangumi {
           <Tabs activeLabel={this.activeCollection} labels={this.collectionLabels} onChange={this.handleCollectionChange} />
         </div>
         {this.loading && !this.responseData && <Skeleton />}
+        {this.error && <Error error={this.error} />}
         {this.responseData && <List loading={this.loading} list={this.responseData.list} />}
+        {this.responseData && this.responseData.total === 0 && <Empty />}
         {this.responseData && (
           <Pagination
             pageNumber={this.pageNumber}

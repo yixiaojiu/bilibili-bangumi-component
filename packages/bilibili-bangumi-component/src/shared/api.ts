@@ -1,4 +1,4 @@
-import { serializeSearchParams } from './utils'
+import { formatUrl, serializeSearchParams } from './utils'
 import type { BgmQuery, BilibiliQuery, Collection, CollectionType, Subject, SubjectType } from './types'
 
 const collectionMap: Record<Collection, CollectionType> = {
@@ -30,7 +30,7 @@ export async function getBilibili(baseUrl: string, params: BilibiliParams) {
     collectionType: collectionMap[params.collectionType],
   }
   const url = new URL(baseUrl)
-  const res = await fetch(`${url.origin}${url.pathname}/bilibili?${serializeSearchParams(query)}`)
+  const res = await fetch(`${formatUrl(url)}/bilibili?${serializeSearchParams(query)}`)
   return await res.json()
 }
 
@@ -41,6 +41,6 @@ export async function getBangumi(baseUrl: string, params: BgmParams) {
     subjectType: subjectMap[params.subjectType],
   }
   const url = new URL(baseUrl)
-  const res = await fetch(`${url.origin}${url.pathname}/bgm?${serializeSearchParams(query)}`)
+  const res = await fetch(`${formatUrl(url)}/bgm?${serializeSearchParams(query)}`)
   return await res.json()
 }

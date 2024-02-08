@@ -1,16 +1,17 @@
 import type { BilibiliQuery, LabelItem, ListItem, ResponseData } from '../../bilibili-bangumi-component/src/shared/types'
 import { numberToZh, serializeSearchParams } from '../../bilibili-bangumi-component/src/shared/utils'
+import { generateRes } from './utils'
 
 export async function handler(query: BilibiliQuery, env?: NodeJS.ProcessEnv) {
   const { collectionType = '0', uid: paramsUid, pageNumber = '1', pageSize = '10' } = query
   const vmid = paramsUid ?? env?.BILIBILI
 
   if (!vmid) {
-    return Response.json({
+    return generateRes({
       code: 400,
       message: 'uid is required',
       data: {},
-    }, { status: 400 })
+    })
   }
   const searchParams = serializeSearchParams({
     type: 1,
@@ -24,14 +25,14 @@ export async function handler(query: BilibiliQuery, env?: NodeJS.ProcessEnv) {
   const data = await res.json()
 
   if (!res.ok) {
-    return Response.json({
+    return generateRes({
       code: 502,
       message: data.message,
       data: {},
-    }, { status: 502 })
+    })
   }
 
-  return Response.json({
+  return generateRes({
     code: 200,
     message: 'ok',
     data: handleFetchData(data.data),

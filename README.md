@@ -166,11 +166,13 @@ bilibili-bangumi {
 
 ### 组件
 
-| 字段           | 描述                                     |
-|:--------------:|:----------------------------------------:|
-| api          | 后端 api 地址                              |
-| bilibili-uid | Bilibili 的 uid，在后端中引入 uid 的 env 后可以不设置 |
-| bgm-uid      | Bangumi 的 uid，在后端中引入 uid 的 env 后可以不设置  |
+| 字段           | 描述                                     | 默认值 |
+|:--------------:|:----------------------------------------:|:------:|
+| api                | 后端 api 地址                                     | - |
+| bilibili-uid       | Bilibili 的 uid，在后端中引入 uid 的 env 后可以不设置 | - |
+| bgm-uid            | Bangumi 的 uid，在后端中引入 uid 的 env 后可以不设置  | - |
+| bilibili-enabled   | 是否展示 Bilibili                                 | true |
+| bgm-enabled        | 是否展示 Bangumi                                  | true|
 
 ## TODO
 

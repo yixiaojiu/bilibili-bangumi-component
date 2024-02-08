@@ -27,3 +27,8 @@ export function numberToZh(num: number) {
   const sub = displayStr[length - 1] === '0' ? '' : `.${displayStr[length - 1]}`
   return `${displayStr.slice(0, length - 1)}${sub}亿`
 }
+
+export function formatUrl(url: URL) {
+  const pathname = url.pathname === '/' ? '' : url.pathname
+  return `${url.origin}${pathname}`
+}
