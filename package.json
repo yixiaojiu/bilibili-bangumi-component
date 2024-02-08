@@ -1,7 +1,7 @@
 {
   "name": "@bilibili-bangumi-component/monorepo",
   "type": "module",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@8.14.1",
   "description": "展示 bilibili 与 Bangumi 追番列表的 WebComponent 组件",
