@@ -1,11 +1,18 @@
 import { formatUrl, serializeSearchParams } from './utils'
-import type { BgmQuery, BilibiliQuery, Collection, CollectionType, Subject, SubjectType } from './types'
+import type { AnimeCollection, BgmQuery, BilibiliQuery, Collection, CollectionType, GameCollection, Subject, SubjectType } from './types'
 
-const collectionMap: Record<Collection, CollectionType> = {
+const animeCollectionMap: Record<AnimeCollection, CollectionType> = {
   全部: '0',
   想看: '1',
   在看: '2',
   看过: '3',
+}
+
+const gameCollectionMap: Record<GameCollection, CollectionType> = {
+  全部: '0',
+  在玩: '1',
+  想玩: '2',
+  玩过: '3',
 }
 
 const subjectMap: Record<Subject, SubjectType> = {
@@ -27,7 +34,7 @@ interface BgmParams extends BilibiliParams {
 export async function getBilibili(baseUrl: string, params: BilibiliParams) {
   const query: BilibiliQuery = {
     ...params,
-    collectionType: collectionMap[params.collectionType],
+    collectionType: animeCollectionMap[params.collectionType],
   }
   const url = new URL(baseUrl)
   const res = await fetch(`${formatUrl(url)}/bilibili?${serializeSearchParams(query)}`)
@@ -35,6 +42,9 @@ export async function getBilibili(baseUrl: string, params: BilibiliParams) {
 }
 
 export async function getBangumi(baseUrl: string, params: BgmParams) {
+  const { subjectType } = params
+  const collectionMap = subjectType === '动画' ? animeCollectionMap : gameCollectionMap
+
   const query: BgmQuery = {
     ...params,
     collectionType: collectionMap[params.collectionType],

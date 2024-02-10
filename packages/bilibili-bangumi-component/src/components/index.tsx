@@ -1,5 +1,5 @@
 import { Component, Prop, State, h } from '@stencil/core'
-import type { Collection, Platform, ResponseData, Subject } from '../shared/types'
+import type { AnimeCollection, Collection, GameCollection, Platform, ResponseData, Subject } from '../shared/types'
 import type { UnionToTuple } from '../shared/typeUtils'
 import type { BilibiliParams } from '../shared/api'
 import { getBangumi, getBilibili } from '../shared/api'
@@ -35,7 +35,7 @@ export class BilibiliBangumi {
   subjectLabels: UnionToTuple<Subject> = ['动画', '游戏']
   @State() activeSubject: Subject = '动画'
 
-  collectionLabels: UnionToTuple<Collection> = ['全部', '想看', '在看', '看过']
+  @State() collectionLabels: UnionToTuple<AnimeCollection> | UnionToTuple<GameCollection> = ['全部', '想看', '在看', '看过']
   @State() activeCollection: Collection = '全部'
 
   componentWillLoad() {
@@ -91,6 +91,7 @@ export class BilibiliBangumi {
   }
 
   private handleSubjectChange = (label: Subject) => {
+    this.collectionLabels = label === '动画' ? ['全部', '想看', '在看', '看过'] : ['全部', '想玩', '在玩', '玩过']
     this.activeSubject = label
     this.pageNumber = 1
     this.activeCollection = '全部'
@@ -154,7 +155,7 @@ export class BilibiliBangumi {
       <div>
         <div class="bbc-header-platform">
           <Tabs activeLabel={this.activePlatform} labels={this.platformLabels} onChange={this.handlePlatformChange} />
-          {this.platformLabels.length > 1 && <div class="divider" />}
+          { this.activePlatform === 'Bangumi' && <div class="divider" />}
           {
             this.activePlatform === 'Bangumi'
               && <Tabs activeLabel={this.activeSubject} labels={this.subjectLabels} onChange={this.handleSubjectChange} />

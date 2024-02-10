@@ -2,7 +2,11 @@ export type Platform = 'Bilibili' | 'Bangumi'
 
 export type Subject = '动画' | '游戏'
 
-export type Collection = '全部' | '想看' | '在看' | '看过'
+export type AnimeCollection = '全部' | '想看' | '在看' | '看过'
+
+export type GameCollection = '全部' | '想玩' | '在玩' | '玩过'
+
+export type Collection = AnimeCollection | GameCollection
 
 export type CollectionType = '0' | '1' | '2' | '3'
 
