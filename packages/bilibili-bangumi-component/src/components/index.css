@@ -225,18 +225,19 @@
   .bbc-error {
     margin: 20px 0;
     display: flex;
+    gap: 12px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 
-  .bbc-error svg {
-    color: #ff4d4f;
-    height: 72px;
-    width: 72px;
+  .bbc-error img {
+    display: block;
+    width: 260px;
   }
 
   .bbc-error p {
+    margin: 0;
     color: var(--bbc-text-base-color);
     font-size: 18px;
   }
