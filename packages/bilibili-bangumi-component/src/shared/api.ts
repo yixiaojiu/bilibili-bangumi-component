@@ -36,8 +36,7 @@ export async function getBilibili(baseUrl: string, params: BilibiliParams) {
     ...params,
     collectionType: animeCollectionMap[params.collectionType],
   }
-  const url = new URL(baseUrl)
-  const res = await fetch(`${formatUrl(url)}/bilibili?${serializeSearchParams(query)}`)
+  const res = await fetch(`${formatUrl(baseUrl)}/bilibili?${serializeSearchParams(query)}`)
   return await res.json()
 }
 
@@ -50,7 +49,6 @@ export async function getBangumi(baseUrl: string, params: BgmParams) {
     collectionType: collectionMap[params.collectionType],
     subjectType: subjectMap[params.subjectType],
   }
-  const url = new URL(baseUrl)
-  const res = await fetch(`${formatUrl(url)}/bgm?${serializeSearchParams(query)}`)
+  const res = await fetch(`${formatUrl(baseUrl)}/bgm?${serializeSearchParams(query)}`)
   return await res.json()
 }

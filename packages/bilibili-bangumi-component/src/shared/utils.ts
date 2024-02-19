@@ -28,7 +28,11 @@ export function numberToZh(num: number) {
   return `${displayStr.slice(0, length - 1)}${sub}亿`
 }
 
-export function formatUrl(url: URL) {
+export function formatUrl(baseUrl: string) {
+  if (!baseUrl.startsWith('http'))
+    return baseUrl
+
+  const url = new URL(baseUrl)
   const pathname = url.pathname === '/' ? '' : url.pathname
   return `${url.origin}${pathname}`
 }

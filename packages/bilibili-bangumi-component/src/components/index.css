@@ -199,13 +199,14 @@
 
   .bbc-skeleton-avatar {
     height: 140px;
-    border-radius: 8px;
+    border-radius: 12px;
     background-color: #f2f3f5;
     aspect-ratio: 3 / 4;
   }
 
   .bbc-skeleton-row {
     height: 24px;
+    border-radius: 8px;
     background-color: #f2f3f5;
   }
 

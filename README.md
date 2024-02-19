@@ -4,8 +4,6 @@
 
 参考 [hexo-bilibili-bangumi](https://github.com/HCLonely/hexo-bilibili-bangumi)，[Bilibili-Bangumi-JS](https://github.com/hans362/Bilibili-Bangumi-JS)，[Roozen的小破站](https://roozen.top/bangumis)
 
-[视频教程](https://www.bilibili.com/video/BV1ht421W74u)
-
 ## 特性
 
 - 使用 WebComponent 实现，可用于任何前端应用
@@ -23,6 +21,8 @@
 
 ## 使用
 
+这里有视频教程 *⸜( •ᴗ• )⸝* [https://www.bilibili.com/video/BV1ht421W74u](https://www.bilibili.com/video/BV1ht421W74u)
+
 ### `uid` 获取
 
 下面要用
@@ -39,38 +39,9 @@
 
 ### 后端
 
-后端使用 Serverless Function 实现
-
 如果你不太方便搭建后端服务，可以先使用这个地址 `https://yi_xiao_jiu-bangumi.web.val.run`
 
-#### 方案一：使用 val towm
-
-1. 到 [val town](https://www.val.town/) 注册账号
-
-2. 创建一个 HTTP handler
-![HTTP handler](docs/images/http-handler.png)
-
-3. 将 [api/val-town.js](api/val-town.js) 中的代码复制到此处
-
-![copy-code](docs/images/copy-code.png)
-
-4. （可选）添加 `uid` env
-
-![val-town-env](docs/images/val-town-env.png)
-
-#### 方案二：使用 vercel
-
-**吐槽：** 一开始是以 vercel 的 [Edge Function](https://vercel.com/docs/functions/edge-functions) 为平台进行开发的，结果基本功能都开发完了，部署测试时发现 vercel 域名被墙了，气晕了 😡😡😡。
-
-需要自己想办法解决 vercel 域名被墙的问题
-
-1. fork 本项目，并在 vercel 中导入
-
-2. 设置 `uid` 环境变量（可选）
-
-![vercel-env](docs/images/vercel-env.png)
-
-**注意：** vercel 的接口需要加上 `/api` 路径，例如：`https://xxxx.vercel.app/api`
+部署后端，请查看 [docs/backend.md](docs/backend.md)
 
 ### 前端
 

@@ -10,5 +10,7 @@
       ]
     }
   ],
-  "rewrites": [{ "source": "/api/(.*)", "destination": "/api/vercel" }]
+  "rewrites": [{ "source": "/api/(.*)", "destination": "/api/vercel" }],
+  "framework": null,
+  "functionFailoverRegions": ["hkg1", "hnd1", "kix1", "sin1"]
 }
