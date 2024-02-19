@@ -49,4 +49,10 @@
 
 ![alt text](./images/vercel/image-7.png)
 
+5. 验证是否部署成功
+
+![alt text](./images/vercel/image-8.png)
+
+![alt text](./images/vercel/image-9.png)
+
 **注意：** vercel 的接口需要加上 `/api` 路径，例如：`https://xxxx.vercel.app/api`
