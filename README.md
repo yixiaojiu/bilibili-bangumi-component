@@ -31,17 +31,21 @@
 
 登录哔哩哔哩后前往 [https://space.bilibili.com/](https://space.bilibili.com)页面，网址最后的一串数字就是 `uid`
 
-**需要将追番列表设置为公开！**
+**注意：** 需要将追番列表设置为公开！
 
 #### Bangumi
 
 登录 [Bangumi](https://bangumi.tv/) 后打开控制台(Ctrl+Shift+J)，输入CHOBITS_UID回车，下面会输出 `uid`
+
+---
 
 ### 后端
 
 如果你不太方便搭建后端服务，可以先使用这个地址 `https://yi_xiao_jiu-bangumi.web.val.run`
 
 部署后端，请查看 [docs/backend.md](docs/backend.md)
+
+---
 
 ### 前端
 
@@ -135,7 +139,7 @@ bilibili-bangumi {
 
 [https://vue-quarkd.hellobike.com/#/zh-CN/guide/notice](https://vue-quarkd.hellobike.com/#/zh-CN/guide/notice)
 
-## Api
+## API
 
 ### 组件
 
@@ -152,4 +156,3 @@ bilibili-bangumi {
 - [ ] UI 优化
 - [ ] 自建服务器部署
 - [ ] 支持 Bangumi 书籍收藏展示
-- [ ] 支持添加展示数据
