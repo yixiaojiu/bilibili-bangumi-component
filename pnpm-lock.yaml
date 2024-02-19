@@ -42,11 +42,10 @@ importers:
   packages/api: {}
 
   packages/bilibili-bangumi-component:
-    dependencies:
+    devDependencies:
       '@stencil/core':
         specifier: ^4.7.0
         version: 4.11.0
-    devDependencies:
       '@types/node':
         specifier: ^20.10.0
         version: 20.11.6
@@ -735,7 +734,7 @@ packages:
     resolution: {integrity: sha512-zsKhgIkTGo+s7IthitxR/MKiMS3Ck1yIypOdXr0aE6ofboKqe9NdffTcxZ0vel0wD2bZYOb6WfPMzuhRKk6+FA==}
     engines: {node: '>=16.0.0', npm: '>=7.10.0'}
     hasBin: true
-    dev: false
+    dev: true
 
   /@stylistic/eslint-plugin-js@1.5.4(eslint@8.56.0):
     resolution: {integrity: sha512-3ctWb3NvJNV1MsrZN91cYp2EGInLPSoZKphXIbIRx/zjZxKwLDr9z4LMOWtqjq14li/OgqUUcMq5pj8fgbLoTw==}
