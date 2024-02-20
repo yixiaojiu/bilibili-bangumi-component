@@ -2,6 +2,12 @@ import { parseSearchParams } from '../../bilibili-bangumi-component/src/shared/u
 import { handler as bilibili } from './bilibili'
 import { handler as bgm } from './bgm'
 
+function setCORS(res: Response) {
+  res.headers.set('Access-Control-Allow-Origin', '*')
+  res.headers.set('Access-Control-Max-Age', '86400')
+  return res
+}
+
 export default {
   async fetch(request: Request, env: NodeJS.ProcessEnv) {
     const url = new URL(request.url)
@@ -10,14 +16,14 @@ export default {
     if (isMock) {
       if (url.pathname.endsWith('bilibili'))
         return Response.json(mockDataMap.bilibili)
-      else
-        return Response.json(mockDataMap.bgm)
+
+      else return Response.json(mockDataMap.bgm)
     }
 
     if (url.pathname.endsWith('bilibili'))
-      return await bilibili(query, env)
+      return setCORS(await bilibili(query, env))
     else if (url.pathname.endsWith('bgm'))
-      return await bgm(query, env)
+      return setCORS(await bgm(query, env))
 
     return Response.json({
       code: 404,
