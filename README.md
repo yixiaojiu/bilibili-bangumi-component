@@ -128,10 +128,12 @@ bilibiliBangumi.shadowRoot.appendChild(style)
 
 ```css
 bilibili-bangumi {
-  /* 基础文本 */
-  --bbc-text-base-color: #4c4948;
-  /* 下划线、背景之类的 */
-  --bbc-primary-color: #425aef;
+    /* 基础文本颜色 */
+    --bbc-text-base-color: #4c4948;
+    /* 标签颜色 */
+    --bbc-label-color: #FF9843;
+    /* 下划线、背景之类的颜色 */
+    --bbc-primary-color: #425aef;
 }
 ```
 
@@ -155,4 +157,3 @@ bilibili-bangumi {
 
 - [ ] UI 优化
 - [ ] 自建服务器部署
-- [ ] 支持 Bangumi 书籍收藏展示

@@ -1,11 +1,11 @@
 @layer bilibili-bangumi-component {
   :host {
     display: block;
-    /* 基础文本 */
+    /* 基础文本颜色 */
     --bbc-text-base-color: #4c4948;
-    /* 内容信息的文本 */
-    /* --bbc-text-primary-color: #2fd8d8; */
-    /* 下划线之类的 */
+    /* 标签颜色 */
+    --bbc-label-color: #FF9843;
+    /* 下划线、背景之类的颜色 */
     --bbc-primary-color: #425aef;
   }
 
@@ -44,14 +44,16 @@
   .bbc-header-platform {
     display: flex;
     align-items: center;
-    gap: 28px;
-    height: 40px;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 16px;
+    /* height: 40px; */
   }
 
   .bbc-header-platform .divider {
     width: 3px;
     border-radius: 2px;
-    height: 80%;
+    height: 32px;
     background-color: var(--bbc-primary-color);
   }
 
@@ -103,7 +105,7 @@
   }
 
   .bbc-bangumi-labels {
-    color: #FF9843;
+    color: var(--bbc-label-color);
     display: flex;
   }
 
@@ -114,7 +116,7 @@
     justify-content: space-between;
     width: 13%;
     height: 36px;
-    border-right: 1px solid #FF9843;
+    border-right: 1px solid var(--bbc-label-color);
   }
 
   .bbc-bangumi-label:last-child {
@@ -124,6 +126,7 @@
   .bbc-bangumi-label p {
     font-size: 14px;
     margin: 0;
+    padding: 0 4px;
   }
 
   .bbc-bangumi-label:not(.bbc-bangumi-label > .bbc-bangumi-label-title) {
@@ -243,6 +246,10 @@
   }
 
   @media screen and (max-width: 768px) {
+    .divider {
+      visibility: hidden;
+    }
+
     .bbc-tab-item {
       padding: 4px 12px;
     }

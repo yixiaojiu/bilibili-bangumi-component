@@ -1,10 +1,11 @@
-import type { BgmQuery, LabelItem, ListItem, ResponseData } from '../../bilibili-bangumi-component/src/shared/types'
+import type { BgmQuery, LabelItem, ListItem, ResponseData, SubjectType } from '../../bilibili-bangumi-component/src/shared/types'
 import { serializeSearchParams } from '../../bilibili-bangumi-component/src/shared/utils'
 import { generateRes } from './utils'
 
-const subjectTypeMap = {
+const subjectTypeMap: Record<SubjectType, string> = {
   1: '2', // 动画
   2: '4', // 游戏
+  3: '1', // 书籍
 }
 
 const collectionTypeMap = {
@@ -69,6 +70,10 @@ function handleFetchData(data: any, init: { pageNumber: number, pageSize: number
         label: '排名',
         value: subject?.rank,
       },
+      {
+        label: '时间',
+        value: subject?.date,
+      },
     ]
     return {
       name: subject?.name,
@@ -76,7 +81,12 @@ function handleFetchData(data: any, init: { pageNumber: number, pageSize: number
       summary: subject?.short_summary,
       cover: subject?.images?.large,
       url: subject?.id ? `https://bgm.tv/subject/${subject?.id}` : 'https://bgm.tv/',
-      labels: labels.filter(item => item.label),
+      labels: labels.filter((item) => {
+        if ('value' in item)
+          return item.value
+        else
+          return item.label
+      }),
     }
   })
   return {

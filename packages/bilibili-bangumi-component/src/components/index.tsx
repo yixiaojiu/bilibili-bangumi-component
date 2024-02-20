@@ -1,8 +1,9 @@
 import { Component, Prop, State, h } from '@stencil/core'
-import type { AnimeCollection, Collection, GameCollection, Platform, ResponseData, Subject } from '../shared/types'
+import type { Collection, CollectionLabel, Platform, ResponseData, Subject } from '../shared/types'
 import type { UnionToTuple } from '../shared/typeUtils'
 import type { BilibiliParams } from '../shared/api'
 import { getBangumi, getBilibili } from '../shared/api'
+import { collectionLabelMap } from '../shared/dataMap'
 import { Tabs } from './Tabs'
 import { List } from './List'
 import { type ChangeType, Pagination } from './Pagination'
@@ -32,10 +33,10 @@ export class BilibiliBangumi {
   platformLabels: UnionToTuple<Platform> = ['Bilibili', 'Bangumi']
   @State() activePlatform: Platform = 'Bilibili'
 
-  subjectLabels: UnionToTuple<Subject> = ['动画', '游戏']
+  subjectLabels: UnionToTuple<Subject> = ['动画', '游戏', '书籍']
   @State() activeSubject: Subject = '动画'
 
-  @State() collectionLabels: UnionToTuple<AnimeCollection> | UnionToTuple<GameCollection> = ['全部', '想看', '在看', '看过']
+  @State() collectionLabels: CollectionLabel = ['全部', '想看', '在看', '看过']
   @State() activeCollection: Collection = '全部'
 
   componentWillLoad() {
@@ -83,6 +84,7 @@ export class BilibiliBangumi {
   }
 
   private handlePlatformChange = (label: Platform) => {
+    this.collectionLabels = collectionLabelMap['动画']
     this.activePlatform = label
     this.pageNumber = 1
     this.activeSubject = '动画'
@@ -91,7 +93,7 @@ export class BilibiliBangumi {
   }
 
   private handleSubjectChange = (label: Subject) => {
-    this.collectionLabels = label === '动画' ? ['全部', '想看', '在看', '看过'] : ['全部', '想玩', '在玩', '玩过']
+    this.collectionLabels = collectionLabelMap[label]
     this.activeSubject = label
     this.pageNumber = 1
     this.activeCollection = '全部'
@@ -135,7 +137,7 @@ export class BilibiliBangumi {
     this.fetchData()
   }
 
-  handleInputChange = (event: Event) => {
+  private handleInputChange = (event: Event) => {
     const inputValue = Number.parseInt((event.target as HTMLInputElement).value)
     if (Object.is(inputValue, Number.NaN))
       return

@@ -1,16 +1,22 @@
+import type { UnionToTuple } from './typeUtils'
+
 export type Platform = 'Bilibili' | 'Bangumi'
 
-export type Subject = '动画' | '游戏'
+export type Subject = '动画' | '游戏' | '书籍'
 
 export type AnimeCollection = '全部' | '想看' | '在看' | '看过'
 
 export type GameCollection = '全部' | '想玩' | '在玩' | '玩过'
 
-export type Collection = AnimeCollection | GameCollection
+export type BookCollection = '全部' | '想读' | '在读' | '读过'
+
+export type Collection = AnimeCollection | GameCollection | BookCollection
 
 export type CollectionType = '0' | '1' | '2' | '3'
 
-export type SubjectType = '1' | '2'
+export type CollectionLabel = UnionToTuple<AnimeCollection> | UnionToTuple<GameCollection> | UnionToTuple<BookCollection>
+
+export type SubjectType = '1' | '2' | '3'
 
 export interface BilibiliQuery {
   /**
