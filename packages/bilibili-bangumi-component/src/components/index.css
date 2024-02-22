@@ -246,10 +246,6 @@
   }
 
   @media screen and (max-width: 768px) {
-    .divider {
-      visibility: hidden;
-    }
-
     .bbc-tab-item {
       padding: 4px 12px;
     }
