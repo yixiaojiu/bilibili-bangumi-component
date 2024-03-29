@@ -1,6 +1,6 @@
 {
   "name": "bilibili-bangumi-component",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "展示 bilibili 与 Bangumi 追番列表的 WebComponent 组件",
   "license": "MIT",
   "homepage": "https://github.com/yixiaojiu/bilibili-bangumi-component#readme",
