@@ -2,6 +2,7 @@ import { parseSearchParams } from '../../bilibili-bangumi-component/src/shared/u
 import { handler as bilibili } from './bilibili'
 import { handler as bgm } from './bgm'
 import { handleQuery } from './shared/utils'
+import { customHandler } from './shared'
 
 function setCORS(res: Response) {
   res.headers.set('Access-Control-Allow-Origin', '*')
@@ -14,17 +15,20 @@ export default {
     const url = new URL(request.url)
     const query = handleQuery(parseSearchParams(url))
 
-    if (isMock) {
-      if (url.pathname.endsWith('bilibili'))
-        return Response.json(mockDataMap.bilibili)
+    let customSource = {}
+    try {
+      customSource = customData
+    }
+    catch {
 
-      else return Response.json(mockDataMap.bgm)
     }
 
     if (url.pathname.endsWith('bilibili'))
       return setCORS(await bilibili(query, env))
     else if (url.pathname.endsWith('bgm'))
       return setCORS(await bgm(query, env))
+    else if (url.pathname.endsWith('custom'))
+      return setCORS(customHandler(query, customSource))
 
     return Response.json({
       code: 404,

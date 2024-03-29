@@ -2,7 +2,7 @@
 
 后端使用 Serverless Function 实现
 
-#### 方案一：使用 val towm
+## 方案一：使用 val towm
 
 1. 到 [val town](https://www.val.town/) 注册账号
 
@@ -17,7 +17,7 @@
 
 ![val-town-env](./images/val-town-env.png)
 
-#### 方案二：使用 vercel
+## 方案二：使用 vercel
 
 **吐槽：** 一开始是以 vercel 的 [Edge Function](https://vercel.com/docs/functions/edge-functions) 为平台进行开发的，结果基本功能都开发完了，部署测试时发现 vercel 域名被墙了，气晕了 😡😡😡。
 
@@ -56,3 +56,7 @@
 ![alt text](./images/vercel/image-9.png)
 
 **注意：** vercel 的接口需要加上 `/api` 路径，例如：`https://xxxx.vercel.app/api`
+
+## 方案三：使用 cloudflare
+
+与 val-town 类似，复制代码[cloudflare.js](/api/cloudflare.js)

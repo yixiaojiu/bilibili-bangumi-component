@@ -12,6 +12,9 @@ export namespace Components {
         "bgmUid"?: string;
         "bilibiliEnabled": boolean;
         "bilibiliUid"?: string;
+        "customEnabled": boolean;
+        "customLabel": string;
+        "pageSize": number;
     }
 }
 declare global {
@@ -32,6 +35,9 @@ declare namespace LocalJSX {
         "bgmUid"?: string;
         "bilibiliEnabled"?: boolean;
         "bilibiliUid"?: string;
+        "customEnabled"?: boolean;
+        "customLabel"?: string;
+        "pageSize"?: number;
     }
     interface IntrinsicElements {
         "bilibili-bangumi": BilibiliBangumi;

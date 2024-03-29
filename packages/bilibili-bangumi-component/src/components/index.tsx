@@ -2,7 +2,7 @@ import { Component, Prop, State, h } from '@stencil/core'
 import type { Collection, CollectionLabel, Platform, ResponseData, Subject } from '../shared/types'
 import type { UnionToTuple } from '../shared/typeUtils'
 import type { BilibiliParams } from '../shared/api'
-import { getBangumi, getBilibili } from '../shared/api'
+import { getBangumi, getBilibili, getCustom } from '../shared/api'
 import { collectionLabelMap } from '../shared/dataMap'
 import { Tabs } from './Tabs'
 import { List } from './List'
@@ -22,12 +22,14 @@ export class BilibiliBangumi {
   @Prop() bgmUid?: string
   @Prop() bilibiliEnabled = true
   @Prop() bgmEnabled = true
+  @Prop() pageSize = 15
+  @Prop() customEnabled = false
+  @Prop() customLabel = '自定义'
 
   @State() loading = false
   @State() error?: Error
 
   @State() pageNumber = 1
-  @State() pageSize = 15
   @State() responseData: ResponseData
 
   platformLabels: Platform[] = ['Bilibili', 'Bangumi']
@@ -40,8 +42,11 @@ export class BilibiliBangumi {
   @State() activeCollection: Collection = '全部'
 
   componentWillLoad() {
-    const filterArr = [this.bilibiliEnabled, this.bgmEnabled]
-    this.platformLabels = this.platformLabels.filter((_, index) => filterArr[index])
+    const platformLabels = [...this.platformLabels]
+    if (this.customEnabled)
+      platformLabels.push(this.customLabel)
+    const filterArr = [this.bilibiliEnabled, this.bgmEnabled, this.customEnabled]
+    this.platformLabels = platformLabels.filter((_, index) => filterArr[index])
     this.activePlatform = this.platformLabels[0]
     this.fetchData()
   }
@@ -60,10 +65,16 @@ export class BilibiliBangumi {
       if (this.activePlatform === 'Bilibili') {
         response = await getBilibili(this.api, bilibiliParams)
       }
-      else {
+      else if (this.activePlatform === 'Bangumi') {
         response = await getBangumi(this.api, {
           ...bilibiliParams,
           uid: this.bgmUid,
+          subjectType: this.activeSubject,
+        })
+      }
+      else {
+        response = await getCustom(this.api, {
+          ...bilibiliParams,
           subjectType: this.activeSubject,
         })
       }
@@ -156,9 +167,9 @@ export class BilibiliBangumi {
       <div>
         <div class="bbc-header-platform">
           <Tabs activeLabel={this.activePlatform} labels={this.platformLabels} onChange={this.handlePlatformChange} />
-          { this.activePlatform === 'Bangumi' && <div class="divider" />}
+          { this.activePlatform !== 'Bilibili' && <div class="divider" />}
           {
-            this.activePlatform === 'Bangumi'
+            this.activePlatform !== 'Bilibili'
               && <Tabs activeLabel={this.activeSubject} labels={this.subjectLabels} onChange={this.handleSubjectChange} />
           }
         </div>

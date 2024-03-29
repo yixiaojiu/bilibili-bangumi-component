@@ -13,6 +13,8 @@ interface BgmParams extends BilibiliParams {
   subjectType: Subject
 }
 
+type CustomParams = Omit<BgmParams, 'uid'>
+
 export async function getBilibili(baseUrl: string, params: BilibiliParams) {
   const query: BilibiliQuery = {
     ...params,
@@ -31,5 +33,17 @@ export async function getBangumi(baseUrl: string, params: BgmParams) {
     subjectType: subjectMap[params.subjectType],
   }
   const res = await fetch(`${formatUrl(baseUrl)}/bgm?${serializeSearchParams(query)}`)
+  return await res.json()
+}
+
+export async function getCustom(baseUrl: string, params: CustomParams) {
+  const { subjectType } = params
+
+  const query: BgmQuery = {
+    ...params,
+    collectionType: collectionMap[subjectType][params.collectionType],
+    subjectType: subjectMap[params.subjectType],
+  }
+  const res = await fetch(`${formatUrl(baseUrl)}/custom?${serializeSearchParams(query)}`)
   return await res.json()
 }
