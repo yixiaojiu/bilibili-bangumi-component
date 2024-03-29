@@ -118,6 +118,10 @@ bilibili-bangumi {
 
 [https://vue-quarkd.hellobike.com/#/zh-CN/guide/notice](https://vue-quarkd.hellobike.com/#/zh-CN/guide/notice)
 
+## 第三方集成
+
+- Valaxy: [valaxy-addon-bangumi](https://github.com/YunYouJun/valaxy/tree/main/packages/valaxy-addon-bangumi)
+
 ## API
 
 ### 组件
