@@ -9,3 +9,5 @@ const env = {
   BILIBILI: string,
   BGM: string,
 }
+
+const customData: any

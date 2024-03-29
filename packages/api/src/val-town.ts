@@ -1,10 +1,11 @@
 import { parseSearchParams } from '../../bilibili-bangumi-component/src/shared/utils'
 import { handler as bilibili } from './bilibili'
 import { handler as bgm } from './bgm'
+import { handleQuery } from './shared/utils'
 
 export default async function (request: Request) {
   const url = new URL(request.url)
-  const query = parseSearchParams(url) as any
+  const query = handleQuery(parseSearchParams(url))
 
   let envVal = {}
 

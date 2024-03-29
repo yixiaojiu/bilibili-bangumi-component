@@ -1,6 +1,7 @@
 import { parseSearchParams } from '../../bilibili-bangumi-component/src/shared/utils'
 import { handler as bilibili } from './bilibili'
 import { handler as bgm } from './bgm'
+import { handleQuery } from './shared/utils'
 
 function setCORS(res: Response) {
   res.headers.set('Access-Control-Allow-Origin', '*')
@@ -11,7 +12,7 @@ function setCORS(res: Response) {
 export default {
   async fetch(request: Request, env: NodeJS.ProcessEnv) {
     const url = new URL(request.url)
-    const query = parseSearchParams(url) as any
+    const query = handleQuery(parseSearchParams(url))
 
     if (isMock) {
       if (url.pathname.endsWith('bilibili'))

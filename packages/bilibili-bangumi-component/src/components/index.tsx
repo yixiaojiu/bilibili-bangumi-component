@@ -30,7 +30,7 @@ export class BilibiliBangumi {
   @State() pageSize = 15
   @State() responseData: ResponseData
 
-  platformLabels: UnionToTuple<Platform> = ['Bilibili', 'Bangumi']
+  platformLabels: Platform[] = ['Bilibili', 'Bangumi']
   @State() activePlatform: Platform = 'Bilibili'
 
   subjectLabels: UnionToTuple<Subject> = ['动画', '游戏', '书籍']
@@ -41,7 +41,6 @@ export class BilibiliBangumi {
 
   componentWillLoad() {
     const filterArr = [this.bilibiliEnabled, this.bgmEnabled]
-    // @ts-expect-error
     this.platformLabels = this.platformLabels.filter((_, index) => filterArr[index])
     this.activePlatform = this.platformLabels[0]
     this.fetchData()

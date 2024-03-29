@@ -1,6 +1,6 @@
 import type { BgmQuery, LabelItem, ListItem, ResponseData, SubjectType } from '../../bilibili-bangumi-component/src/shared/types'
 import { serializeSearchParams } from '../../bilibili-bangumi-component/src/shared/utils'
-import { generateRes } from './utils'
+import { generateRes } from './shared'
 
 const subjectTypeMap: Record<SubjectType, string> = {
   1: '2', // 动画
@@ -51,7 +51,7 @@ export async function handler(params: BgmQuery, env?: NodeJS.ProcessEnv) {
   return generateRes({
     code: 200,
     message: 'ok',
-    data: handleFetchData(data, { pageNumber, pageSize }),
+    data: handleFetchData(data, { pageNumber: Number(pageNumber), pageSize: Number(pageSize) }),
   })
 }
 

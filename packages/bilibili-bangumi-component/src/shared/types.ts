@@ -1,6 +1,6 @@
 import type { UnionToTuple } from './typeUtils'
 
-export type Platform = 'Bilibili' | 'Bangumi'
+export type Platform = 'Bilibili' | 'Bangumi' | string
 
 export type Subject = '动画' | '游戏' | '书籍'
 
@@ -16,6 +16,9 @@ export type CollectionType = '0' | '1' | '2' | '3'
 
 export type CollectionLabel = UnionToTuple<AnimeCollection> | UnionToTuple<GameCollection> | UnionToTuple<BookCollection>
 
+/**
+ * 1 动画 2 游戏 3 书籍
+ */
 export type SubjectType = '1' | '2' | '3'
 
 export interface BilibiliQuery {
@@ -43,13 +46,23 @@ export interface BilibiliQuery {
 
 export interface BgmQuery extends BilibiliQuery {
   /**
-   * 1 为动画 2 为游戏
+   * 1 为动画 2 为游戏 3 为书籍
    */
   subjectType?: SubjectType
 }
 
+export type CustomQuery = Omit<BgmQuery, 'uid'>
+
+interface EmptyData {}
+
+export interface ResponseType {
+  code: number
+  message: string
+  data: ResponseData | EmptyData
+}
+
 export interface ResponseData {
-  list: any
+  list: ListItem[]
   pageNumber: number
   pageSize: number
   total: number

@@ -1,3 +1,5 @@
+import type { ResponseType } from './types'
+
 export function serializeSearchParams(searchParams: object) {
   return Object.entries(searchParams)
     .filter(([, value]) => !!value)
@@ -35,4 +37,10 @@ export function formatUrl(baseUrl: string) {
   const url = new URL(baseUrl)
   const pathname = url.pathname === '/' ? '' : url.pathname
   return `${url.origin}${pathname}`
+}
+
+export function generateRes(params: ResponseType) {
+  return Response.json(params, {
+    status: params.code,
+  })
 }

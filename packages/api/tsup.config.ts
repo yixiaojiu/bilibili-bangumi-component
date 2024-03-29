@@ -4,7 +4,8 @@ import { defineConfig } from 'tsup'
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname)
 
-const mock = readFileSync(path.resolve(__dirname, './src/bilibili.js.mock'), 'utf-8')
+const biliBgmMock = readFileSync(path.resolve(__dirname, './src/mock/bili-bgm.js'), 'utf-8')
+const customMock = readFileSync(path.resolve(__dirname, './src/mock/custom.js'), 'utf-8')
 
 export default defineConfig((options) => {
   return {
@@ -16,7 +17,8 @@ export default defineConfig((options) => {
     format: 'esm',
     banner: {
       js: options.env?.MOCK
-        ? `${mock}
+        ? `${biliBgmMock}
+          ${customMock}
           const isMock = true
       `
         : 'const isMock = false',
