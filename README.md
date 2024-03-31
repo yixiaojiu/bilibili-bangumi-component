@@ -27,3 +27,7 @@
 - 使用： [docs/usage.md](docs/usage.md)
 - 部署后端： [docs/backend.md](docs/backend.md)
 - 自定义数据源： [docs/custom.md](docs/custom.md)
+
+## 第三方集成
+
+- Valaxy: [valaxy-addon-bangumi](https://github.com/YunYouJun/valaxy/tree/main/packages/valaxy-addon-bangumi)
