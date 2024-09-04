@@ -88,3 +88,5 @@ export interface LabelItem {
   label: string
   value?: string | number
 }
+
+export type ContainerState = 'large' | 'middle' | 'small'

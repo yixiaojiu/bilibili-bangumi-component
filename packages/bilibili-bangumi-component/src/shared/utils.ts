@@ -44,3 +44,15 @@ export function generateRes(params: ResponseType) {
     status: params.code,
   })
 }
+
+export function thorttle<T extends (...args: any) => any>(fn: T, wait?: number) {
+  let timer: any
+  return function (...args: Parameters<T>) {
+    if (!timer) {
+      timer = setTimeout(() => {
+        timer = null
+        fn.apply(this, args)
+      }, wait)
+    }
+  }
+}

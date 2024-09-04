@@ -1,8 +1,9 @@
 import { Component, Prop, State, h } from '@stencil/core'
-import type { Collection, CollectionLabel, Platform, ResponseData, Subject } from '../shared/types'
+import type { Collection, CollectionLabel, ContainerState, Platform, ResponseData, Subject } from '../shared/types'
 import type { UnionToTuple } from '../shared/typeUtils'
 import type { BilibiliParams } from '../shared/api'
 import { getBangumi, getBilibili, getCustom } from '../shared/api'
+import { thorttle } from '../shared/utils'
 import { collectionLabelMap } from '../shared/dataMap'
 import { Tabs } from './Tabs'
 import { List } from './List'
@@ -41,6 +42,9 @@ export class BilibiliBangumi {
   @State() collectionLabels: CollectionLabel = ['全部', '想看', '在看', '看过']
   @State() activeCollection: Collection = '全部'
 
+  @State() containerRef: HTMLDivElement = null
+  @State() containerState: ContainerState = 'large'
+
   componentWillLoad() {
     const platformLabels = [...this.platformLabels]
     if (this.customEnabled)
@@ -49,6 +53,25 @@ export class BilibiliBangumi {
     this.platformLabels = platformLabels.filter((_, index) => filterArr[index])
     this.activePlatform = this.platformLabels[0]
     this.fetchData()
+  }
+
+  componentDidLoad() {
+    // 监听容器尺寸变化
+    const update = thorttle((width: number) => {
+      let containerState: ContainerState = 'large'
+      if (width <= 640)
+        containerState = 'middle'
+      if (width <= 465)
+        containerState = 'small'
+
+      this.containerState = containerState
+    }, 100).bind(this)
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries)
+        update(entry.contentRect.width)
+    })
+    resizeObserver.observe(this.containerRef)
   }
 
   private fetchData = async () => {
@@ -164,7 +187,7 @@ export class BilibiliBangumi {
 
   render() {
     return (
-      <div>
+      <div ref={ele => this.containerRef = ele}>
         <div class="bbc-header-platform">
           <Tabs activeLabel={this.activePlatform} labels={this.platformLabels} onChange={this.handlePlatformChange} />
           { this.activePlatform !== 'Bilibili' && <div class="divider" />}
@@ -178,7 +201,7 @@ export class BilibiliBangumi {
         </div>
         {this.loading && !this.responseData && <Skeleton />}
         {this.error && <Error error={this.error} />}
-        {this.responseData && <List loading={this.loading} list={this.responseData.list} />}
+        {this.responseData && <List containerState={this.containerState} loading={this.loading} list={this.responseData.list} />}
         {this.responseData && this.responseData.total === 0 && <Empty />}
         {this.responseData && (
           <Pagination

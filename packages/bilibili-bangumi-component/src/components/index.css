@@ -114,7 +114,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    width: 13%;
+    padding: 0 12px;
     height: 36px;
     border-right: 1px solid var(--bbc-label-color);
   }
@@ -258,20 +258,16 @@
       font-size: 16px;
     }
 
-    .bbc-bangumi-label {
-      width: 30%;
-    }    
-
     .bbc-bangumi-label p {
       font-size: 12px;
     }
-    
-    .bbc-bangumi-label:nth-child(n + 4) {
+
+    /* .bbc-bangumi-label:nth-child(n + 4) {
       display: none;
     }
 
     .bbc-bangumi-label:nth-child(3) {
       border-right: none;
-    }
+    } */
   }
 }
