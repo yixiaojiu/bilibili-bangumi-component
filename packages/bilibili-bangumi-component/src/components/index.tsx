@@ -189,15 +189,15 @@ export class BilibiliBangumi {
     return (
       <div ref={ele => this.containerRef = ele}>
         <div class="bbc-header-platform">
-          <Tabs activeLabel={this.activePlatform} labels={this.platformLabels} onChange={this.handlePlatformChange} />
+          <Tabs containerState={this.containerState} activeLabel={this.activePlatform} labels={this.platformLabels} onChange={this.handlePlatformChange} />
           { this.activePlatform !== 'Bilibili' && <div class="divider" />}
           {
             this.activePlatform !== 'Bilibili'
-              && <Tabs activeLabel={this.activeSubject} labels={this.subjectLabels} onChange={this.handleSubjectChange} />
+              && <Tabs containerState={this.containerState} activeLabel={this.activeSubject} labels={this.subjectLabels} onChange={this.handleSubjectChange} />
           }
         </div>
         <div>
-          <Tabs activeLabel={this.activeCollection} labels={this.collectionLabels} onChange={this.handleCollectionChange} />
+          <Tabs containerState={this.containerState} activeLabel={this.activeCollection} labels={this.collectionLabels} onChange={this.handleCollectionChange} />
         </div>
         {this.loading && !this.responseData && <Skeleton />}
         {this.error && <Error error={this.error} />}

@@ -20,7 +20,11 @@ const Label: FunctionalComponent<LabelProps> = ({ containerState, labels }) => {
   return (
     <div class="bbc-bangumi-labels">
       {renderLabels.map(label => (
-        <div class="bbc-bangumi-label">
+        <div class={{
+          'bbc-bangumi-label': true,
+          'bbc-md-label-text': containerState !== 'large',
+        }}
+        >
           <p class="bbc-bangumi-label-title">{label.label}</p>
           {label.value && <p>{label.value}</p>}
         </div>
