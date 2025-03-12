@@ -14,7 +14,7 @@
 
 ## 展示
 
-展示地址 [https://yixiaojiu-blog.netlify.app/docs/record/bangumi/](https://yixiaojiu-blog.netlify.app/docs/record/bangumi/)
+展示地址 [note.yixiaojiu.top/docs/record/bangumi](note.yixiaojiu.top/docs/record/bangumi)
 
 <img src="docs/images/screenshot-pc.png" height="200px" alt="screenshot-pc" />
 
@@ -31,3 +31,34 @@
 ## 第三方集成
 
 - Valaxy: [valaxy-addon-bangumi](https://github.com/YunYouJun/valaxy/tree/main/packages/valaxy-addon-bangumi)
+
+## How to development
+
+项目采用 monorepo，使用 pnpm 管理依赖，并在 `package.json` 指定了版本，版本对不上可能无法安装，可以把 `package.json` 里的限制删了
+
+```sh
+pnpm i
+```
+
+### server
+
+server 用的是 vercel 的服务，在本地开发时要关联 vercel 上的一个 project
+
+```sh
+pnpm run build:api
+
+# 登陆并关联 vercel
+pnpm run dev:vercel
+```
+
+仓库在 `./packages/api`
+
+感觉比较麻烦可以直接改前端页面所用到的后端服务 `https://yi_xiao_jiu-bangumi.web.val.run`，文件位置在 `packages/bilibili-bangumi-component/src/index.html:60`，
+
+### client
+
+```sh
+pnpm run dev:lib
+```
+
+仓库在 `./packages/bilibili-bangumi-component`

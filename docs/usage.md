@@ -8,7 +8,7 @@
 
 登录哔哩哔哩后前往 [https://space.bilibili.com/](https://space.bilibili.com)页面，网址最后的一串数字就是 `uid`
 
-**注意：** 需要将追番列表设置为公开！
+**注意：** 追番信息属于个人隐私，默认是不公开的，需要在 b 站将追番设置为公开！
 
 ### Bangumi
 
@@ -56,6 +56,7 @@ pnpm add bilibili-bangumi-component
 ```js
 import { defineCustomElements } from 'bilibili-bangumi-component/loader'
 
+// 注册 web component 组件
 defineCustomElements()
 ```
 
@@ -71,6 +72,7 @@ defineCustomElements()
 ```jsx
 import { defineCustomElements } from 'bilibili-bangumi-component/loader'
 
+// 注册 web component 组件
 defineCustomElements()
 
 export function Bangumi() {

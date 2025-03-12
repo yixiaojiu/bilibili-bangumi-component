@@ -24,7 +24,7 @@ export async function handler(query: BilibiliQuery, env?: NodeJS.ProcessEnv) {
   const res = await fetch(`https://api.bilibili.com/x/space/bangumi/follow/list?${searchParams}`)
   const data = await res.json()
 
-  if (!res.ok) {
+  if (!res.ok || data?.code !== 0) {
     return generateRes({
       code: 502,
       message: data.message,

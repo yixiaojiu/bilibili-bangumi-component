@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "private": true,
-  "packageManager": "pnpm@9.6.0",
+  "packageManager": "pnpm@10.3.0",
   "description": "展示 bilibili 与 Bangumi 追番列表的 WebComponent 组件",
   "author": "yixiaojiu",
   "license": "MIT",
