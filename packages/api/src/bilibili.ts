@@ -66,10 +66,19 @@ function handleFetchData(data: any): ResponseData {
         value: item?.stat?.danmaku && numberToZh(item.stat.danmaku),
       },
     ]
+
+    let cover = item.cover as string
+
+    if (cover && cover.startsWith('http:')) {
+      const url = new URL(cover)
+      url.protocol = 'https:'
+      cover = url.toString()
+    }
+
     return {
       nameCN: item.title,
       summary: item.summary,
-      cover: item.cover,
+      cover,
       url: item.url,
       labels: labels.filter(item => item.label),
     }
