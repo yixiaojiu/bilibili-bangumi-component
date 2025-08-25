@@ -8,7 +8,7 @@ const biliBgmMock = readFileSync(path.resolve(__dirname, './src/mock/bili-bgm.js
 const customMock = readFileSync(path.resolve(__dirname, './src/mock/custom.js'), 'utf-8')
 
 export default defineConfig((options) => {
-  return {
+  return [{
     entry: ['src/vercel.ts', 'src/val-town.ts', 'src/cloudflare.ts'],
     outDir: path.resolve(__dirname, '../../api'),
     splitting: false,
@@ -23,5 +23,20 @@ export default defineConfig((options) => {
       `
         : 'const isMock = false',
     },
-  }
+  }, {
+    entry: ['src/tencent-edge-one.ts'],
+    outDir: path.resolve(__dirname, '../../functions/api'),
+    splitting: false,
+    minify: !options.watch,
+    clean: true,
+    format: 'esm',
+    banner: {
+      js: options.env?.MOCK
+        ? `${biliBgmMock}
+          ${customMock}
+          const isMock = true
+      `
+        : 'const isMock = false',
+    },
+  }]
 })

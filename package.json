@@ -17,7 +17,7 @@
     "dev:api": "pnpm --filter api run dev",
     "dev:lib": "pnpm --filter bilibili-bangumi-component run dev",
     "build:lib": "pnpm --filter bilibili-bangumi-component run build",
-    "build:api": "pnpm --filter api run build",
+    "build:api": "pnpm --filter api run build && mv functions/api/tencent-edge-one.js functions/api/[[default]].js",
     "build:mock": "pnpm --filter api run build:mock",
     "lint:fix": "eslint . --fix",
     "lint": "eslint .",
