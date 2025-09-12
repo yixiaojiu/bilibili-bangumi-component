@@ -1,0 +1,8 @@
+{
+  "redirects": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/vercel"
+    }
+  ]
+}

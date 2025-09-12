@@ -25,7 +25,7 @@ export default defineConfig((options) => {
     },
   }, {
     entry: ['src/tencent-edge-one.ts'],
-    outDir: path.resolve(__dirname, '../../functions/api'),
+    outDir: path.resolve(__dirname, '../../edge-functions/api'),
     splitting: false,
     minify: !options.watch,
     clean: true,
