@@ -14,7 +14,7 @@
 
 ## 展示
 
-展示地址 [note.yixiaojiu.top/docs/record/bangumi](note.yixiaojiu.top/docs/record/bangumi)
+展示地址 [note.yixiaojiu.top/docs/record/bangumi](https://note.yixiaojiu.top/docs/record/show-window/bangumi)
 
 <img src="docs/images/screenshot-pc.png" height="200px" alt="screenshot-pc" />
 
