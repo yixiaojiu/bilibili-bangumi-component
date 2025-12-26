@@ -1,25 +1,32 @@
-import type { UnionToTuple } from './typeUtils'
-
 export type Platform = 'Bilibili' | 'Bangumi' | string
 
-export type Subject = '动画' | '游戏' | '书籍'
+export type Subject = '动画' | '游戏' | '书籍' | '音乐' | '三次元'
 
-export type AnimeCollection = '全部' | '想看' | '在看' | '看过'
+export type AnimeCollection = '全部' | '想看' | '在看' | '看过' | '搁置' | '抛弃'
 
-export type GameCollection = '全部' | '想玩' | '在玩' | '玩过'
+export type GameCollection = '全部' | '想玩' | '在玩' | '玩过' | '搁置' | '抛弃'
 
-export type BookCollection = '全部' | '想读' | '在读' | '读过'
+export type BookCollection = '全部' | '想读' | '在读' | '读过' | '搁置' | '抛弃'
 
 export type Collection = AnimeCollection | GameCollection | BookCollection
 
-export type CollectionType = '0' | '1' | '2' | '3'
-
-export type CollectionLabel = UnionToTuple<AnimeCollection> | UnionToTuple<GameCollection> | UnionToTuple<BookCollection>
+export type CollectionType = '0' | '1' | '2' | '3' | '4' | '5'
 
 /**
- * 1 动画 2 游戏 3 书籍
+ * 收藏标签元组类型
+ * 根据不同的主题类型，返回对应的收藏标签数组
  */
-export type SubjectType = '1' | '2' | '3'
+export type CollectionLabel =
+  ['全部', '想看', '在看', '看过']
+  | ['全部', '想看', '在看', '看过', '搁置', '抛弃']
+  | ['全部', '想玩', '在玩', '玩过', '搁置', '抛弃']
+  | ['全部', '想读', '在读', '读过', '搁置', '抛弃']
+  | ['全部', '想听', '在听', '听过', '搁置', '抛弃']
+
+/**
+ * 1 动画 2 游戏 3 书籍 4 音乐 5 三次元
+ */
+export type SubjectType = '1' | '2' | '3' | '4' | '5'
 
 export interface BilibiliQuery {
   /**

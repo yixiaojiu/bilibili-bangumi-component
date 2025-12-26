@@ -36,7 +36,7 @@ export class BilibiliBangumi {
   platformLabels: Platform[] = ['Bilibili', 'Bangumi']
   @State() activePlatform: Platform = 'Bilibili'
 
-  subjectLabels: UnionToTuple<Subject> = ['动画', '游戏', '书籍']
+  subjectLabels: UnionToTuple<Subject> = ['动画', '游戏', '书籍', '音乐', '三次元']
   @State() activeSubject: Subject = '动画'
 
   @State() collectionLabels: CollectionLabel = ['全部', '想看', '在看', '看过']
@@ -117,7 +117,7 @@ export class BilibiliBangumi {
   }
 
   private handlePlatformChange = (label: Platform) => {
-    this.collectionLabels = collectionLabelMap['动画']
+    this.collectionLabels = label === 'Bilibili' ? ['全部', '想看', '在看', '看过'] : collectionLabelMap['动画']
     this.activePlatform = label
     this.pageNumber = 1
     this.activeSubject = '动画'
@@ -126,7 +126,7 @@ export class BilibiliBangumi {
   }
 
   private handleSubjectChange = (label: Subject) => {
-    this.collectionLabels = collectionLabelMap[label]
+    this.collectionLabels = this.activePlatform === 'Bilibili' ? ['全部', '想看', '在看', '看过'] : collectionLabelMap[label]
     this.activeSubject = label
     this.pageNumber = 1
     this.activeCollection = '全部'
@@ -199,7 +199,7 @@ export class BilibiliBangumi {
         <div>
           <Tabs containerState={this.containerState} activeLabel={this.activeCollection} labels={this.collectionLabels} onChange={this.handleCollectionChange} />
         </div>
-        {this.loading && !this.responseData && <Skeleton />}
+        {this.loading && <Skeleton />}
         {this.error && <Error error={this.error} />}
         {this.responseData && <List containerState={this.containerState} loading={this.loading} list={this.responseData.list} />}
         {this.responseData && this.responseData.total === 0 && <Empty />}

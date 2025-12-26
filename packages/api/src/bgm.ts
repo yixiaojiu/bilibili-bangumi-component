@@ -6,6 +6,8 @@ const subjectTypeMap: Record<SubjectType, string> = {
   1: '2', // 动画
   2: '4', // 游戏
   3: '1', // 书籍
+  4: '3', // 音乐
+  5: '6', // 三次元
 }
 
 const collectionTypeMap = {
@@ -13,6 +15,8 @@ const collectionTypeMap = {
   1: '1', // 想看
   2: '3', // 在看
   3: '2', // 看过
+  4: '4', // 搁置
+  5: '5', // 抛弃
 }
 
 export async function handler(params: BgmQuery, env?: NodeJS.ProcessEnv) {
