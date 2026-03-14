@@ -8,3 +8,9 @@ node_modules
 **/www/**
 
 .env*.local
+
+# Tencent Cloud EdgeOne
+.env
+.edgeone/*
+.tef_dist/*
+  

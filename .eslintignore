@@ -8,5 +8,8 @@ node_modules
 **/www/**
 
 api/*
+.edgeone/*
+edge-functions/*
+node-functions/*
 .env*.local
 
