@@ -60,3 +60,22 @@
 ## 方案三：使用 cloudflare
 
 与 val-town 类似，复制代码[cloudflare.js](/api/cloudflare.js)
+
+## 方案四：使用腾讯云 EdgeOne Pages
+
+1. Fork 本项目到自己的 GitHub 仓库
+
+2. 登录 [腾讯云 EdgeOne Pages](https://console.cloud.tencent.com/edgeone/pages) 控制台
+
+3. 创建新项目，选择从 GitHub 导入
+
+4. 选择 fork 的仓库
+
+5. 添加环境变量（可选）
+
+- `BILIBILI`: 你的 Bilibili 的 uid
+- `BGM`: 你的 Bangumi 的 uid
+
+6. 部署完成后访问，查看是否数据正常
+
+**注意：** 腾讯云 EdgeOne Pages 的接口需要加上 `/api` 路径，例如：`https://xxxx.edgeone.cool/api`，长期使用需要设置自定义域名
