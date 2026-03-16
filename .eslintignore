@@ -9,7 +9,5 @@ node_modules
 
 api/*
 .edgeone/*
-edge-functions/*
-node-functions/*
 .env*.local
 

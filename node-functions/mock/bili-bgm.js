@@ -1,4 +1,3 @@
-/* eslint-disable unused-imports/no-unused-vars */
 const bilibiliMockData = {
   code: 200,
   message: 'ok',

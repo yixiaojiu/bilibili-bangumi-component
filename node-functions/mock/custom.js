@@ -1,5 +1,3 @@
-/* eslint-disable unused-imports/no-unused-vars */
-
 const customData = {
   // 动画
   anime: {

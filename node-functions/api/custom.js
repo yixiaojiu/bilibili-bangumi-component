@@ -1,5 +1,5 @@
 import { customData } from '../mock/index.js'
-import { generateRes, parseSearchParams, handleQuery } from '../shared/index.js'
+import { generateRes, handleQuery, parseSearchParams } from '../shared/index.js'
 
 const customSubjectMap = {
   1: 'anime',

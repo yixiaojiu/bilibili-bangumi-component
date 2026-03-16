@@ -1,5 +1,5 @@
 import { mockDataMap } from '../mock/index.js'
-import { serializeSearchParams, parseSearchParams, numberToZh, generateRes, handleQuery } from '../shared/index.js'
+import { generateRes, handleQuery, numberToZh, parseSearchParams, serializeSearchParams } from '../shared/index.js'
 
 async function bilibiliHandler(query, env) {
   const { collectionType = '0', uid: paramsUid, pageNumber = '1', pageSize = '10' } = query
@@ -62,7 +62,7 @@ function handleBilibiliData(data) {
       summary: item.summary,
       cover,
       url: item.url,
-      labels: labels.filter((l) => l.label),
+      labels: labels.filter(l => l.label),
     }
   })
 
@@ -81,9 +81,8 @@ export default function onRequestGet(context) {
   const url = new URL(request.url)
   const query = handleQuery(parseSearchParams(url))
 
-  if (env?.MOCK === 'true') {
+  if (env?.MOCK === 'true')
     return Response.json(mockDataMap.bilibili)
-  }
 
   return bilibiliHandler(query, env)
 }

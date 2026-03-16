@@ -1,5 +1,5 @@
 import { mockDataMap } from '../mock/index.js'
-import { serializeSearchParams, parseSearchParams, generateRes, handleQuery } from '../shared/index.js'
+import { generateRes, handleQuery, parseSearchParams, serializeSearchParams } from '../shared/index.js'
 
 const subjectTypeMap = {
   1: '2', // 动画
@@ -76,7 +76,8 @@ function handleBgmData(data, init) {
       cover: subject?.images?.large,
       url: subject?.id ? `https://bgm.tv/subject/${subject?.id}` : 'https://bgm.tv/',
       labels: labels.filter((l) => {
-        if ('value' in l) return l.value
+        if ('value' in l)
+          return l.value
         else return l.label
       }),
     }
@@ -96,9 +97,8 @@ export default function onRequestGet(context) {
   const url = new URL(request.url)
   const query = handleQuery(parseSearchParams(url))
 
-  if (env?.MOCK === 'true') {
+  if (env?.MOCK === 'true')
     return Response.json(mockDataMap.bgm)
-  }
 
   return bgmHandler(query, env)
 }
