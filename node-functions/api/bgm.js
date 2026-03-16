@@ -1,35 +1,21 @@
-function serializeSearchParams(params) {
-  return Object.entries(params)
-    .filter(([, value]) => value !== undefined && value !== null && value !== '')
-    .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-    .join('&')
-}
-
-function parseSearchParams(url) {
-  return Object.fromEntries(
-    Array.from(url.searchParams.entries()).filter(([, value]) => value)
-  )
-}
-
-function generateRes(data) {
-  return Response.json(data, { status: data.code })
-}
+import { mockDataMap } from '../mock/index.js'
+import { generateRes, handleQuery, parseSearchParams, serializeSearchParams } from '../shared/index.js'
 
 const subjectTypeMap = {
-  1: '2',
-  2: '4',
-  3: '1',
-  4: '3',
-  5: '6',
+  1: '2', // 动画
+  2: '4', // 游戏
+  3: '1', // 书籍
+  4: '3', // 音乐
+  5: '6', // 三次元
 }
 
 const collectionTypeMap = {
-  0: null,
-  1: '1',
-  2: '3',
-  3: '2',
-  4: '4',
-  5: '5',
+  0: null, // 全部
+  1: '1', // 想看
+  2: '3', // 在看
+  3: '2', // 看过
+  4: '4', // 搁置
+  5: '5', // 抛弃
 }
 
 async function bgmHandler(query, env) {
@@ -90,7 +76,8 @@ function handleBgmData(data, init) {
       cover: subject?.images?.large,
       url: subject?.id ? `https://bgm.tv/subject/${subject?.id}` : 'https://bgm.tv/',
       labels: labels.filter((l) => {
-        if ('value' in l) return l.value
+        if ('value' in l)
+          return l.value
         else return l.label
       }),
     }
@@ -104,43 +91,14 @@ function handleBgmData(data, init) {
   }
 }
 
-function handleQuery(query) {
-  const { pageNumber = 1, pageSize = 10 } = query
-  return {
-    ...query,
-    pageNumber: Number(pageNumber),
-    pageSize: Number(pageSize),
-  }
-}
-
 export default function onRequestGet(context) {
   const { request } = context
   const env = context.env || {}
   const url = new URL(request.url)
   const query = handleQuery(parseSearchParams(url))
 
-  if (env?.MOCK === 'true') {
-    return Response.json({
-      code: 200,
-      message: 'ok',
-      data: {
-        list: [
-          {
-            name: 'リズと青い鳥',
-            nameCN: '莉兹与青鸟',
-            summary: '铠塚霙，高中3年级，双簧管演奏者...',
-            cover: 'https://lain.bgm.tv/pic/cover/l/1d/35/216371_5926R.jpg',
-            url: 'https://bgm.tv/subject/216371',
-            labels: [{ label: '1话' }, { label: '评分', value: 8.6 }, { label: '排名', value: 27 }],
-          },
-        ],
-        pageNumber: 1,
-        pageSize: 10,
-        total: 6,
-        totalPages: 1,
-      },
-    })
-  }
+  if (env?.MOCK === 'true')
+    return Response.json(mockDataMap.bgm)
 
   return bgmHandler(query, env)
 }

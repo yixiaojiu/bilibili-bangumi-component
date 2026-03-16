@@ -1,32 +1,5 @@
-function serializeSearchParams(params) {
-  return Object.entries(params)
-    .filter(([, value]) => value !== undefined && value !== null && value !== '')
-    .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
-    .join('&')
-}
-
-function parseSearchParams(url) {
-  return Object.fromEntries(
-    Array.from(url.searchParams.entries()).filter(([, value]) => value)
-  )
-}
-
-function numberToZh(num) {
-  const numStr = num.toString()
-  if (numStr.length < 5) return numStr
-  if (numStr.length < 9) {
-    const numVal = numStr.slice(0, -4)
-    const lastChar = numVal[numVal.length - 1]
-    return `${numVal.slice(0, numVal.length - 1)}${lastChar === '0' ? '' : '.'}${lastChar}万`
-  }
-  const numVal = numStr.slice(0, -8)
-  const lastChar = numVal[numVal.length - 1]
-  return `${numVal.slice(0, numVal.length - 1)}${lastChar === '0' ? '' : '.'}${lastChar}亿`
-}
-
-function generateRes(data) {
-  return Response.json(data, { status: data.code })
-}
+import { mockDataMap } from '../mock/index.js'
+import { generateRes, handleQuery, numberToZh, parseSearchParams, serializeSearchParams } from '../shared/index.js'
 
 async function bilibiliHandler(query, env) {
   const { collectionType = '0', uid: paramsUid, pageNumber = '1', pageSize = '10' } = query
@@ -89,7 +62,7 @@ function handleBilibiliData(data) {
       summary: item.summary,
       cover,
       url: item.url,
-      labels: labels.filter((l) => l.label),
+      labels: labels.filter(l => l.label),
     }
   })
 
@@ -102,42 +75,14 @@ function handleBilibiliData(data) {
   }
 }
 
-function handleQuery(query) {
-  const { pageNumber = 1, pageSize = 10 } = query
-  return {
-    ...query,
-    pageNumber: Number(pageNumber),
-    pageSize: Number(pageSize),
-  }
-}
-
 export default function onRequestGet(context) {
   const { request } = context
   const env = context.env || {}
   const url = new URL(request.url)
   const query = handleQuery(parseSearchParams(url))
 
-  if (env?.MOCK === 'true') {
-    return Response.json({
-      code: 200,
-      message: 'ok',
-      data: {
-        list: [
-          {
-            nameCN: '前进吧！登山少女 第二季',
-            summary: '故事承接第一季剧情，葵在重遇喜欢户外活动的青梅竹马朋友日向后，再次进行登山活动。',
-            cover: 'http://i0.hdslb.com/bfs/bangumi/47c46badc1c450f22f36b5d27304591db9b0a8c1.jpg',
-            url: 'https://www.bilibili.com/bangumi/play/ss4115',
-            labels: [{ label: '全24话' }, { label: '评分', value: 9.8 }, { label: '播放量', value: '399.2万' }],
-          },
-        ],
-        pageNumber: 1,
-        pageSize: 10,
-        total: 120,
-        totalPages: 12,
-      },
-    })
-  }
+  if (env?.MOCK === 'true')
+    return Response.json(mockDataMap.bilibili)
 
   return bilibiliHandler(query, env)
 }
