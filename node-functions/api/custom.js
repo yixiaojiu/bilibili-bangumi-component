@@ -15,20 +15,6 @@ const customCollectionMap = {
   3: 'done',
 }
 
-function generateEmpty(pageSize) {
-  return generateRes({
-    code: 200,
-    message: 'ok',
-    data: {
-      list: [],
-      pageNumber: 1,
-      pageSize,
-      total: 0,
-      totalPages: 1,
-    },
-  })
-}
-
 function customHandler(params, customData) {
   const { subjectType = '1', collectionType = '0', pageNumber = 1, pageSize = 10 } = params
 
@@ -59,6 +45,20 @@ function customHandler(params, customData) {
       pageSize,
       total: data.length,
       totalPages: Math.ceil(data.length / pageSize),
+    },
+  })
+}
+
+function generateEmpty(pageSize) {
+  return generateRes({
+    code: 200,
+    message: 'ok',
+    data: {
+      list: [],
+      pageNumber: 1,
+      pageSize,
+      total: 0,
+      totalPages: 1,
     },
   })
 }

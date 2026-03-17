@@ -1,7 +1,7 @@
 import { mockDataMap } from '../mock/index.js'
 import { generateRes, handleQuery, numberToZh, parseSearchParams, serializeSearchParams } from '../shared/index.js'
 
-async function bilibiliHandler(query, env) {
+export async function handler(query, env) {
   const { collectionType = '0', uid: paramsUid, pageNumber = '1', pageSize = '10' } = query
   const vmid = paramsUid ?? env?.BILIBILI
 
@@ -12,7 +12,6 @@ async function bilibiliHandler(query, env) {
       data: {},
     })
   }
-
   const searchParams = serializeSearchParams({
     type: 1,
     follow_status: collectionType,
@@ -35,22 +34,40 @@ async function bilibiliHandler(query, env) {
   return generateRes({
     code: 200,
     message: 'ok',
-    data: handleBilibiliData(data.data),
+    data: handleFetchData(data.data),
   })
 }
 
-function handleBilibiliData(data) {
-  const list = data?.list?.map((item) => {
+function handleFetchData(data) {
+  const list = (data?.list)?.map((item) => {
     const labels = [
-      { label: item?.new_ep?.index_show },
-      { label: '评分', value: item?.rating?.score },
-      { label: '播放量', value: item?.stat?.view && numberToZh(item.stat.view) },
-      { label: '追番数', value: item?.stat?.follow && numberToZh(item.stat.follow) },
-      { label: '投币数', value: item?.stat?.coin && numberToZh(item.stat.coin) },
-      { label: '弹幕数', value: item?.stat?.danmaku && numberToZh(item.stat.danmaku) },
+      {
+        label: item?.new_ep?.index_show,
+      },
+      {
+        label: '评分',
+        value: item?.rating?.score,
+      },
+      {
+        label: '播放量',
+        value: item?.stat?.view && numberToZh(item.stat.view),
+      },
+      {
+        label: '追番数',
+        value: item?.stat?.follow && numberToZh(item.stat.follow),
+      },
+      {
+        label: '投币数',
+        value: item?.stat?.coin && numberToZh(item.stat.coin),
+      },
+      {
+        label: '弹幕数',
+        value: item?.stat?.danmaku && numberToZh(item.stat.danmaku),
+      },
     ]
 
     let cover = item.cover
+
     if (cover && cover.startsWith('http:')) {
       const url = new URL(cover)
       url.protocol = 'https:'
@@ -62,7 +79,7 @@ function handleBilibiliData(data) {
       summary: item.summary,
       cover,
       url: item.url,
-      labels: labels.filter(l => l.label),
+      labels: labels.filter(item => item.label),
     }
   })
 
@@ -84,5 +101,5 @@ export default function onRequestGet(context) {
   if (env?.MOCK === 'true')
     return Response.json(mockDataMap.bilibili)
 
-  return bilibiliHandler(query, env)
+  return handler(query, env)
 }

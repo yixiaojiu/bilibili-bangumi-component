@@ -18,18 +18,17 @@ const collectionTypeMap = {
   5: '5', // 抛弃
 }
 
-async function bgmHandler(query, env) {
-  const { subjectType = '1', uid: paramsUid, collectionType = '0', pageNumber = 1, pageSize = 10 } = query
+export async function handler(params, env) {
+  const { subjectType = '1', uid: paramsUid, collectionType = '0', pageNumber = 1, pageSize = 10 } = params
   const uid = paramsUid ?? env?.BGM
 
   if (!uid) {
     return generateRes({
       code: 400,
-      message: 'uid is required',
+      message: `uid is required`,
       data: {},
     })
   }
-
   const searchParams = serializeSearchParams({
     subject_type: subjectTypeMap[subjectType],
     type: collectionTypeMap[collectionType],
@@ -39,7 +38,7 @@ async function bgmHandler(query, env) {
 
   const res = await fetch(`https://api.bgm.tv/v0/users/${uid}/collections?${searchParams}`, {
     headers: {
-      'User-Agent': 'yixiaojiu/bilibili-bangumi-component (https://github.com/yixiaojiu/bilibili-bangumi-component)',
+      'User-Agent': `yixiaojiu/bilibili-bangumi-component (https://github.com/yixiaojiu/bilibili-bangumi-component)`,
     },
   })
   const data = await res.json()
@@ -55,34 +54,44 @@ async function bgmHandler(query, env) {
   return generateRes({
     code: 200,
     message: 'ok',
-    data: handleBgmData(data, { pageNumber: Number(pageNumber), pageSize: Number(pageSize) }),
+    data: handleFetchData(data, { pageNumber: Number(pageNumber), pageSize: Number(pageSize) }),
   })
 }
 
-function handleBgmData(data, init) {
-  const list = data?.data?.map((item) => {
+function handleFetchData(data, init) {
+  const list = (data?.data)?.map((item) => {
     const subject = item?.subject
     const labels = [
-      { label: subject?.eps && `${subject.eps}话` },
-      { label: '评分', value: subject?.score },
-      { label: '排名', value: subject?.rank },
-      { label: '时间', value: subject?.date },
+      {
+        label: subject?.eps && `${subject.eps}话`,
+      },
+      {
+        label: '评分',
+        value: subject?.score,
+      },
+      {
+        label: '排名',
+        value: subject?.rank,
+      },
+      {
+        label: '时间',
+        value: subject?.date,
+      },
     ]
-
     return {
       name: subject?.name,
       nameCN: subject?.name_cn,
       summary: subject?.short_summary,
       cover: subject?.images?.large,
       url: subject?.id ? `https://bgm.tv/subject/${subject?.id}` : 'https://bgm.tv/',
-      labels: labels.filter((l) => {
-        if ('value' in l)
-          return l.value
-        else return l.label
+      labels: labels.filter((item) => {
+        if ('value' in item)
+          return item.value
+        else
+          return item.label
       }),
     }
   })
-
   return {
     list: list ?? [],
     ...init,
@@ -100,5 +109,5 @@ export default function onRequestGet(context) {
   if (env?.MOCK === 'true')
     return Response.json(mockDataMap.bgm)
 
-  return bgmHandler(query, env)
+  return handler(query, env)
 }

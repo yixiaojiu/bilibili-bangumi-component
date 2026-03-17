@@ -10,8 +10,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "MOCK=true && tsup --watch",
-    "build": "tsup",
-    "build:mock": "tsup --env.MOCK"
+    "build": "tsup && tsx src/edgeone.ts",
+    "build:mock": "tsup --env.MOCK",
+    "build:edgeone": "tsx src/edgeone.ts"
   },
   "devDependencies": {
   }
