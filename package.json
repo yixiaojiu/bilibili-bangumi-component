@@ -19,6 +19,7 @@
     "build:lib": "pnpm --filter bilibili-bangumi-component run build",
     "build:api": "pnpm --filter api run build",
     "build:mock": "pnpm --filter api run build:mock",
+    "build:edgeone": "pnpm --filter api run build:edgeone",
     "lint:fix": "eslint . --fix",
     "lint": "eslint .",
     "generate": "pnpm --filter bilibili-bangumi-component run generate",
