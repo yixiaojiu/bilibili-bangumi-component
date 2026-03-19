@@ -10,6 +10,8 @@ https://github.com/hans362/Bilibili-Bangumi-JS
 
 https://github.com/HCLonely/hexo-bilibili-bangumi
 
+https://cloud.tencent.com/document/product/1552/127419
+
 ## Api
 
 Bangumi: https://bangumi.github.io/api/#/model-SubjectType
