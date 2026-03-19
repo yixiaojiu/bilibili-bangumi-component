@@ -9,7 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **架构：**
 - **前端组件库** ([packages/bilibili-bangumi-component/](packages/bilibili-bangumi-component/)): 使用 Stencil.js 构建的 WebComponent 组件
 - **后端 API** ([packages/api/](packages/api/)): 无服务器 API，支持 Vercel/Val-Town/Cloudflare 部署
-- **构建后 API** ([api/](api/)): 打包后的 API 文件，用于 Vercel 部署
+- **构建后 API** : 打包后的 API 文件，([api/](api/))用于 Vercel 部署，([cloud-functions/](cloud-functions/))用于 Tencent EdgeOne Pages 部署
 
 ## 常用命令
 
@@ -43,9 +43,13 @@ pnpm run build:mock
 
 # 启动 Vercel 开发服务器（需要先关联 Vercel 项目）
 pnpm run dev:vercel
+
+# 启动 EdgeOne Pages 开发服务器
+pnpm run dev:edgeone
 ```
 
 ### 代码质量
+
 ```bash
 # 运行测试
 pnpm test
@@ -97,6 +101,7 @@ pnpm run ci:publish
 - Vercel Edge Runtime ([vercel.ts](packages/api/src/vercel.ts))
 - Val-Town ([val-town.ts](packages/api/src/val-town.ts))
 - Cloudflare Workers ([cloudflare.ts](packages/api/src/cloudflare.ts))
+- Tencent EdgeOne Pages Functions ([edgeone.ts](packages/api/src/edgeone.ts))
 
 **数据转换层：**
 - [bilibili.ts](packages/api/src/bilibili.ts): Bilibili API 数据转换
@@ -121,4 +126,4 @@ pnpm run ci:publish
 提交前会自动运行 eslint 检查和修复。
 
 ### 类型共享
-前后端通过 [packages/bilibili-bangumi-component/src/shared/types.ts](packages/bilibili-bangumi-component/src/shared/types.ts) 共享类型定义。后端通过相对路径导入这些类型。
+前后端通过 [packages/bilibili-bangumi-component/src/shared/types.ts](packages/bilibili-bangumi-component/src/shared/types.ts) 共享类型定义。后端通过相对路径导入这些类型。[(packages/api/src/edgeone.ts)](packages/api/src/edgeone.ts) 进行了导入处理以适配 edgeone functions 运行环境
