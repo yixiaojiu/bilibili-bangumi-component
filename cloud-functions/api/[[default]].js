@@ -322,5 +322,5 @@ async function onRequestGet(context) {
   }
 }
 export {
-  onRequestGet as default,
+  onRequestGet,
 }
