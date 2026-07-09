@@ -31,7 +31,7 @@ function getRouteType(pathname) {
   return ['bilibili', 'bgm', 'custom'].includes(lastSegment) ? lastSegment : null
 }
 
-async function onRequestGet(context) {
+export async function onRequestGet(context) {
   const { request } = context
   const env = context.env || {}
   const url = new URL(request.url)
@@ -68,8 +68,6 @@ async function onRequestGet(context) {
       return generateRes({ code: 404, message: 'Not found', data: {} })
   }
 }
-
-export { onRequestGet }
 `
 }
 
